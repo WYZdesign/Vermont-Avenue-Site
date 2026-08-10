@@ -228,14 +228,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (lastNow === null) lastNow = now;
       let dt = (now - lastNow) / 1000;      // real elapsed seconds
       if (dt < 0) dt = 0;
-      if (dt > 0.05) dt = 0.05;            // clamp hiccups (tab switch, GC)
+      if (dt > 0.1) dt = 0.032;            // absorb scroll-frame bursts into a single tick
       pending += dt;
       lastNow = now;
-      while (pending >= STEP) {
-        eqT += STEP;
-        pending -= STEP;
-        render();                           // advance by fixed tick
-      }
+      render();                             // redraw every frame
+      // advance phase purely by real elapsed time
+      eqT += dt;
       requestAnimationFrame(tick);
     };
 
