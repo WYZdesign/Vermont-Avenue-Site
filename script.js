@@ -197,9 +197,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    const draw = (now) => {
+    /* Fixed-timestep clock so scroll/jank can NEVER speed up the bars.
+       Phase advances exactly (real elapsed time) seconds, consumed in 32ms
+       logical ticks — immune to rAF bursts or throttling. */
+    let eqT = 0, lastNow = null, pending = 0;
+    const STEP = 0.032;   // 32ms logical tick (~31fps update)
+
+    const render = () => {
       ctx.clearRect(0, 0, W, H);
-      const t = now / 1000;
+      const t = eqT;
       const bw = W / barCount;
       for (let i = 0; i < bars.length; i++) {
         const b = bars[i];
@@ -216,12 +222,26 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.fillStyle = grad;
         ctx.fillRect(x + bw * 0.15, H - h, bw * 0.7, h);
       }
-      requestAnimationFrame(draw);
+    };
+
+    const tick = (now) => {
+      if (lastNow === null) lastNow = now;
+      let dt = (now - lastNow) / 1000;      // real elapsed seconds
+      if (dt < 0) dt = 0;
+      if (dt > 0.05) dt = 0.05;            // clamp hiccups (tab switch, GC)
+      pending += dt;
+      lastNow = now;
+      while (pending >= STEP) {
+        eqT += STEP;
+        pending -= STEP;
+        render();                           // advance by fixed tick
+      }
+      requestAnimationFrame(tick);
     };
 
     build();
-    requestAnimationFrame(draw);
-    window.addEventListener("resize", build);
+    requestAnimationFrame(tick);
+    window.addEventListener("resize", () => { build(); eqT = 0; pending = 0; lastNow = null; });
   };
 
   document.querySelectorAll("#eqCanvas, #liveEq").forEach(initEq);
@@ -278,18 +298,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const img = row.querySelector(".roster__img");
       const name = row.querySelector(".roster__name");
       const rectOf = () => row.getBoundingClientRect();
-      const imgX = gsap.quickTo(img, "x", { duration: 0.3, ease: "power3.out" });
       const imgY = gsap.quickTo(img, "y", { duration: 0.3, ease: "power3.out" });
 
       row.addEventListener("mouseenter", () => {
-        gsap.to(img, { scale: 1, rotate: 0, opacity: 1, duration: 0.4, ease: "back.out(1.6)" });
-        gsap.to(name, { x: 72, duration: 0.5, ease: "power3.out" });
+        gsap.to(img, { scale: 1, rotate: 0, opacity: 1, duration: 0.45, ease: "back.out(1.6)" });
+        gsap.to(name, { x: -28, duration: 0.5, ease: "power3.out" });
       });
       row.addEventListener("mousemove", (e) => {
         const r = rectOf();
-        const x = e.clientX - r.left + 28;
         const y = e.clientY - r.top - img.offsetHeight / 2;
-        imgX(x); imgY(y);
+        imgY(y);
       });
       row.addEventListener("mouseleave", () => {
         gsap.to(img, { scale: 0.8, rotate: -4, opacity: 0, duration: 0.35, ease: "power3.out" });

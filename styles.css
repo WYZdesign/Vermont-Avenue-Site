@@ -373,12 +373,15 @@ section { position: relative; }
 }
 .roster__img {
   position: absolute;
+  right: clamp(0.6rem, 2vw, 1.5rem);
+  left: auto;
+  top: 50%;
   width: clamp(140px, 17vw, 240px);
   aspect-ratio: 4/5; object-fit: cover;
+  transform: translateY(-50%) scale(0.8) rotate(-4deg);
   pointer-events: none;
   opacity: 0;
-  transform: scale(0.8) rotate(-4deg);
-  transition: opacity 0.35s ease;
+  transition: opacity 0.35s ease, transform 0.45s var(--ease);
   box-shadow: 0 30px 60px rgba(0,0,0,0.55);
   z-index: 5;
 }
