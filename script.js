@@ -189,10 +189,10 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let i = 0; i < barCount; i++) {
         bars.push({
           phase: Math.random() * Math.PI * 2,
-          speed: 0.06 + Math.random() * 0.26,
-          wobble: 0.2 + Math.random() * 0.3,
-          base: 0.25 + Math.random() * 0.35,
-          amp: 0.3 + Math.random() * 0.5
+          speed: 0.25 + Math.random() * 0.36,   // 0.25–0.61 rad/s -> ~10–25s cycles (slow to regular, never fast)
+          pulse: 0.18 + Math.random() * 0.22,   // slow secondary undulation
+          base: 0.28 + Math.random() * 0.32,
+          amp: 0.32 + Math.random() * 0.42
         });
       }
     };
@@ -203,11 +203,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const bw = W / barCount;
       for (let i = 0; i < bars.length; i++) {
         const b = bars[i];
-        const s = b.speed * 0.125;
+        const s = b.speed;
         const v = b.base +
-          Math.sin(t * s + b.phase) * b.amp * 0.5 +
-          Math.sin(t * s * 0.6 + b.phase * 1.7) * b.amp * 0.3 +
-          Math.sin(t * s * 0.28 + b.phase * 0.4) * b.amp * 0.3 * b.wobble;
+          Math.sin(t * s + b.phase) * b.amp * 0.6 +
+          Math.sin(t * s * 0.45 + b.phase * 1.3) * b.amp * 0.35 +
+          Math.sin(t * b.pulse + b.phase * 0.6) * b.amp * 0.25;
         const h = Math.max(0.04, Math.min(1, v)) * H;
         const x = i * bw;
         const grad = ctx.createLinearGradient(0, H, 0, H - h);
