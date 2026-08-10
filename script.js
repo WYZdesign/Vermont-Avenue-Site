@@ -301,8 +301,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const imgY = gsap.quickTo(img, "y", { duration: 0.3, ease: "power3.out" });
 
       row.addEventListener("mouseenter", () => {
-        gsap.to(img, { scale: 1, rotate: 0, opacity: 1, duration: 0.45, ease: "back.out(1.6)" });
-        gsap.to(name, { x: -28, duration: 0.5, ease: "power3.out" });
+        gsap.to(img, { xPercent: 0, scale: 1, rotate: 0, opacity: 1, duration: 0.45, ease: "power3.out" });
+        gsap.to(name, { x: 40, duration: 0.5, ease: "power3.out" });
       });
       row.addEventListener("mousemove", (e) => {
         const r = rectOf();
@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imgY(y);
       });
       row.addEventListener("mouseleave", () => {
-        gsap.to(img, { scale: 0.8, rotate: -4, opacity: 0, duration: 0.35, ease: "power3.out" });
+        gsap.to(img, { xPercent: -120, scale: 0.8, rotate: -4, opacity: 0, duration: 0.35, ease: "power3.out" });
         gsap.to(name, { x: 0, duration: 0.45, ease: "power3.out" });
       });
     });

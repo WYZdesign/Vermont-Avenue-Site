@@ -373,12 +373,12 @@ section { position: relative; }
 }
 .roster__img {
   position: absolute;
-  right: clamp(0.6rem, 2vw, 1.5rem);
-  left: auto;
+  left: clamp(0.5rem, 2vw, 0.75rem);
+  right: auto;
   top: 50%;
   width: clamp(140px, 17vw, 240px);
   aspect-ratio: 4/5; object-fit: cover;
-  transform: translateY(-50%) scale(0.8) rotate(-4deg);
+  transform: translate(-120%, -50%) scale(0.8) rotate(-4deg);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.35s ease, transform 0.45s var(--ease);
