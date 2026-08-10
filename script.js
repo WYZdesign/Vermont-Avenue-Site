@@ -92,6 +92,25 @@ document.addEventListener("DOMContentLoaded", () => {
     if (el.textContent.trim() === "") el.textContent = el.dataset.text;
   });
 
+  /* ---------- HERO GYRO (subtle mouse-tilt, composes with scroll parallax) ---------- */
+  const heroEl = document.querySelector(".hero");
+  const vinyl = document.getElementById("heroVinyl");
+  if (heroEl && vinyl && !isTouch && !prefersReduced) {
+    let leaveTo = null;
+    heroEl.addEventListener("mousemove", (e) => {
+      if (leaveTo) clearTimeout(leaveTo);
+      const r = heroEl.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      gsap.to(vinyl, { rotationY: x * 7, rotationX: y * 6, transformPerspective: 900, duration: 0.6, ease: "power2.out" });
+    });
+    heroEl.addEventListener("mouseleave", () => {
+      leaveTo = setTimeout(() => {
+        gsap.to(vinyl, { rotationY: 0, rotationX: 0, duration: 0.9, ease: "power3.out" });
+      }, 200);
+    });
+  }
+
   /* ---------- PRELOADER ---------- */
   const preloader = document.querySelector(".preloader");
   const preCount = document.querySelector(".pre__count");
@@ -170,22 +189,25 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let i = 0; i < barCount; i++) {
         bars.push({
           phase: Math.random() * Math.PI * 2,
-          speed: 0.02 + Math.random() * 0.05,
+          speed: 0.06 + Math.random() * 0.26,
+          wobble: 0.2 + Math.random() * 0.3,
           base: 0.25 + Math.random() * 0.35,
           amp: 0.3 + Math.random() * 0.5
         });
       }
     };
 
-    const draw = (t) => {
+    const draw = (now) => {
       ctx.clearRect(0, 0, W, H);
+      const t = now / 1000;
       const bw = W / barCount;
       for (let i = 0; i < bars.length; i++) {
         const b = bars[i];
+        const s = b.speed * 0.125;
         const v = b.base +
-          Math.sin(t * b.speed + b.phase) * b.amp * 0.5 +
-          Math.sin(t * b.speed * 2.7 + b.phase * 1.7) * b.amp * 0.35 +
-          Math.sin(t * b.speed * 5.1 + b.phase * 0.4) * b.amp * 0.15;
+          Math.sin(t * s + b.phase) * b.amp * 0.5 +
+          Math.sin(t * s * 0.6 + b.phase * 1.7) * b.amp * 0.3 +
+          Math.sin(t * s * 0.28 + b.phase * 0.4) * b.amp * 0.3 * b.wobble;
         const h = Math.max(0.04, Math.min(1, v)) * H;
         const x = i * bw;
         const grad = ctx.createLinearGradient(0, H, 0, H - h);
@@ -254,12 +276,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!isTouch) {
     document.querySelectorAll(".roster__row").forEach((row) => {
       const img = row.querySelector(".roster__img");
+      const name = row.querySelector(".roster__name");
       const rectOf = () => row.getBoundingClientRect();
       const imgX = gsap.quickTo(img, "x", { duration: 0.3, ease: "power3.out" });
       const imgY = gsap.quickTo(img, "y", { duration: 0.3, ease: "power3.out" });
 
       row.addEventListener("mouseenter", () => {
         gsap.to(img, { scale: 1, rotate: 0, opacity: 1, duration: 0.4, ease: "back.out(1.6)" });
+        gsap.to(name, { x: 72, duration: 0.5, ease: "power3.out" });
       });
       row.addEventListener("mousemove", (e) => {
         const r = rectOf();
@@ -269,6 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       row.addEventListener("mouseleave", () => {
         gsap.to(img, { scale: 0.8, rotate: -4, opacity: 0, duration: 0.35, ease: "power3.out" });
+        gsap.to(name, { x: 0, duration: 0.45, ease: "power3.out" });
       });
     });
   }
@@ -329,6 +354,13 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------- FOOTER YEAR ---------- */
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ---------- SERVICE WORKER (PWA) ---------- */
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    });
+  }
 
   /* ---------- FALLBACK FOR NO-JS SAFETY ---------- */
   document.body.classList.add("js-ready");

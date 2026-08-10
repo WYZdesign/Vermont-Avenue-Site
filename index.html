@@ -2,14 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0908">
+  <meta name="application-name" content="Vermont Avenue Records">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
   <title>Vermont Avenue Records — Independent label from Los Angeles</title>
   <meta name="description" content="Vermont Avenue Records is an independent record label based out of Los Angeles. Created by musicians, for musicians. A collective amplifying diverse voices — The LA Limes, The Dante's Inferno, Sophia Morrow, Ryan Washington, Isaiah Harden.">
   <meta property="og:title" content="Vermont Avenue Records">
   <meta property="og:description" content="Created by musicians, for musicians. Independent record label from Los Angeles.">
   <meta property="og:image" content="images/freshly-squeezed.jpg">
   <meta property="og:type" content="website">
-  <link rel="icon" href="images/label-art.jpg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="mask-icon" href="favicon.svg" color="#ffa233">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -28,6 +37,26 @@
   </script>
 </head>
 <body>
+
+  <!-- ============ ICON SPRITE ============ -->
+  <svg class="icons" aria-hidden="true" focusable="false"
+       style="position:absolute;width:0;height:0;overflow:visible;">
+    <symbol id="icon-star" viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.96L12 17.77l-6.18 3.33L7 14.14 4 9.27l6.91-1.01L12 2z"/>
+    </symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24">
+      <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+    </symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24">
+      <path d="M10 6v12l9-6z"/>
+    </symbol>
+    <symbol id="icon-down" viewBox="0 0 24 24">
+      <path d="M7 10l5 5 5-5z"/>
+    </symbol>
+    <symbol id="icon-up" viewBox="0 0 24 24">
+      <path d="M7 14l5-5 5 5z"/>
+    </symbol>
+  </svg>
 
   <!-- ============ PRELOADER ============ -->
   <div class="preloader" aria-hidden="true">
@@ -99,21 +128,21 @@
 
       <div class="hero__scroll">
         <span>SCROLL</span>
-        <span class="hero__scroll-arrow">↓</span>
+        <span class="hero__scroll-arrow"><svg class="icon" aria-hidden="true"><use href="#icon-down"></use></svg></span>
       </div>
     </section>
 
     <!-- ============ MARQUEE ============ -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
-        <span>CREATED BY MUSICIANS, FOR MUSICIANS</span><i class="marquee__star">✦</i>
-        <span>INDEPENDENT · LOS ANGELES</span><i class="marquee__star">✦</i>
-        <span>FAIR PAY FOR ARTISTS</span><i class="marquee__star">✦</i>
-        <span>AMPLIFYING DIVERSE VOICES</span><i class="marquee__star">✦</i>
-        <span>CREATED BY MUSICIANS, FOR MUSICIANS</span><i class="marquee__star">✦</i>
-        <span>INDEPENDENT · LOS ANGELES</span><i class="marquee__star">✦</i>
-        <span>FAIR PAY FOR ARTISTS</span><i class="marquee__star">✦</i>
-        <span>AMPLIFYING DIVERSE VOICES</span><i class="marquee__star">✦</i>
+        <span>CREATED BY MUSICIANS, FOR MUSICIANS</span><i class="marquee__star"><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg></i>
+        <span>INDEPENDENT · LOS ANGELES</span><i class="marquee__star"><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg></i>
+        <span>FAIR PAY FOR ARTISTS</span><i class="marquee__star"><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg></i>
+        <span>AMPLIFYING DIVERSE VOICES</span><i class="marquee__star"><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg></i>
+        <span>CREATED BY MUSICIANS, FOR MUSICIANS</span><i class="marquee__star"><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg></i>
+        <span>INDEPENDENT · LOS ANGELES</span><i class="marquee__star"><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg></i>
+        <span>FAIR PAY FOR ARTISTS</span><i class="marquee__star"><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg></i>
+        <span>AMPLIFYING DIVERSE VOICES</span><i class="marquee__star"><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg></i>
       </div>
     </div>
 
@@ -151,7 +180,7 @@
           </div>
           <span class="roster__genre">Jazz-Funk / Fusion</span>
           <span class="roster__tag">"All the funk that's fit to print"</span>
-          <span class="roster__arrow">↗</span>
+          <span class="roster__arrow"><svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg></span>
           <img class="roster__img" src="images/artist-lalimes.jpg" alt="The LA Limes">
         </a>
 
@@ -163,7 +192,7 @@
           </div>
           <span class="roster__genre">Fusion / Funk / Jazz</span>
           <span class="roster__tag">Fusion from hell</span>
-          <span class="roster__arrow">↗</span>
+          <span class="roster__arrow"><svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg></span>
           <img class="roster__img" src="images/artist-dantes.jpg" alt="The Dante's Inferno">
         </a>
 
@@ -175,7 +204,7 @@
           </div>
           <span class="roster__genre">R&B / Neo-Soul</span>
           <span class="roster__tag">Silk, soul, and light</span>
-          <span class="roster__arrow">↗</span>
+          <span class="roster__arrow"><svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg></span>
           <img class="roster__img" src="images/artist-sophia.jpg" alt="Sophia Morrow">
         </a>
 
@@ -187,7 +216,7 @@
           </div>
           <span class="roster__genre">R&B / Soul / Vocal Jazz</span>
           <span class="roster__tag">Warmth you can feel</span>
-          <span class="roster__arrow">↗</span>
+          <span class="roster__arrow"><svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg></span>
           <img class="roster__img" src="images/artist-ryan.jpg" alt="Ryan Washington">
         </a>
 
@@ -199,7 +228,7 @@
           </div>
           <span class="roster__genre">Piano · R&B / Hip-Hop / Jazz</span>
           <span class="roster__tag">Keys with something to say</span>
-          <span class="roster__arrow">↗</span>
+          <span class="roster__arrow"><svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg></span>
           <img class="roster__img" src="images/artist-isaiah.jpg" alt="Isaiah Harden">
         </a>
       </div>
@@ -210,16 +239,16 @@
       <div class="releases__head">
         <span class="section__label reveal">03 / RELEASES</span>
         <p class="releases__headline reveal">Fresh <span class="serif-it">from</span> the block</p>
-        <a class="releases__all reveal" href="https://vermontavenuerecords.bandcamp.com" target="_blank" rel="noopener">All releases <span class="arrow">↗</span></a>
+        <a class="releases__all reveal" href="https://vermontavenuerecords.bandcamp.com" target="_blank" rel="noopener">All releases <span class="arrow"><svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg></span></a>
       </div>
 
       <div class="releases__viewport">
         <div class="releases__rail">
 
-          <a class="release" href="https://thelalimes.bandcamp.com" target="_blank" rel="noopener" data-cursor="LISTEN">
+          <a class="release" href="https://thelalimes.bandcamp.com/album/freshly-squeezed" target="_blank" rel="noopener" data-cursor="LISTEN">
             <div class="release__cover">
               <img src="images/freshly-squeezed.jpg" alt="Freshly Squeezed cover">
-              <span class="release__play">▶</span>
+              <span class="release__play"><svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg></span>
             </div>
             <div class="release__meta">
               <span class="release__artist">The LA Limes</span>
@@ -228,10 +257,10 @@
             </div>
           </a>
 
-          <a class="release" href="https://tdantesinferno.bandcamp.com" target="_blank" rel="noopener" data-cursor="LISTEN">
+          <a class="release" href="https://tdantesinferno.bandcamp.com/album/descent" target="_blank" rel="noopener" data-cursor="LISTEN">
             <div class="release__cover">
               <img src="images/descent.jpg" alt="Descent cover">
-              <span class="release__play">▶</span>
+              <span class="release__play"><svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg></span>
             </div>
             <div class="release__meta">
               <span class="release__artist">The Dante's Inferno</span>
@@ -240,10 +269,10 @@
             </div>
           </a>
 
-          <a class="release" href="https://tdantesinferno.bandcamp.com" target="_blank" rel="noopener" data-cursor="LISTEN">
+          <a class="release" href="https://tdantesinferno.bandcamp.com/album/grid-failure" target="_blank" rel="noopener" data-cursor="LISTEN">
             <div class="release__cover">
               <img src="images/grid-failure.jpg" alt="Grid Failure cover">
-              <span class="release__play">▶</span>
+              <span class="release__play"><svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg></span>
             </div>
             <div class="release__meta">
               <span class="release__artist">The Dante's Inferno</span>
@@ -255,7 +284,7 @@
           <a class="release" href="https://open.spotify.com/album/4jYvmYKoTEuG3QTdG6CeE5" target="_blank" rel="noopener" data-cursor="LISTEN">
             <div class="release__cover">
               <img src="images/deal-with-the-devil.jpg" alt="Deal With the Devil cover">
-              <span class="release__play">▶</span>
+              <span class="release__play"><svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg></span>
             </div>
             <div class="release__meta">
               <span class="release__artist">The Dante's Inferno</span>
@@ -264,10 +293,10 @@
             </div>
           </a>
 
-          <a class="release" href="https://ryanwashington.bandcamp.com" target="_blank" rel="noopener" data-cursor="LISTEN">
+          <a class="release" href="https://ryanwashington.bandcamp.com/track/turn-your-heart-to-mine" target="_blank" rel="noopener" data-cursor="LISTEN">
             <div class="release__cover">
               <img src="images/ryan-turn-your-heart.jpg" alt="Turn Your Heart to Mine cover">
-              <span class="release__play">▶</span>
+              <span class="release__play"><svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg></span>
             </div>
             <div class="release__meta">
               <span class="release__artist">Ryan Washington</span>
@@ -276,10 +305,10 @@
             </div>
           </a>
 
-          <a class="release" href="https://ryanwashington.bandcamp.com" target="_blank" rel="noopener" data-cursor="LISTEN">
+          <a class="release" href="https://ryanwashington.bandcamp.com/track/what-used-to-be" target="_blank" rel="noopener" data-cursor="LISTEN">
             <div class="release__cover">
               <img src="images/ryan-used-to-be.jpg" alt="What Used to Be cover">
-              <span class="release__play">▶</span>
+              <span class="release__play"><svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg></span>
             </div>
             <div class="release__meta">
               <span class="release__artist">Ryan Washington × Sophia Morrow</span>
@@ -288,10 +317,10 @@
             </div>
           </a>
 
-          <a class="release" href="https://sophiamorrow.bandcamp.com" target="_blank" rel="noopener" data-cursor="LISTEN">
+          <a class="release" href="https://sophiamorrow.bandcamp.com/track/what-used-to-be" target="_blank" rel="noopener" data-cursor="LISTEN">
             <div class="release__cover">
               <img src="images/sophia-used-to-be.jpg" alt="What Used to Be cover">
-              <span class="release__play">▶</span>
+              <span class="release__play"><svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg></span>
             </div>
             <div class="release__meta">
               <span class="release__artist">Sophia Morrow × Ryan Washington</span>
@@ -300,10 +329,10 @@
             </div>
           </a>
 
-          <a class="release" href="https://isaiahharden.bandcamp.com" target="_blank" rel="noopener" data-cursor="LISTEN">
+          <a class="release" href="https://isaiahharden.bandcamp.com/album/therapy" target="_blank" rel="noopener" data-cursor="LISTEN">
             <div class="release__cover">
               <img src="images/therapy.jpg" alt="Therapy cover">
-              <span class="release__play">▶</span>
+              <span class="release__play"><svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg></span>
             </div>
             <div class="release__meta">
               <span class="release__artist">Isaiah Harden</span>
@@ -312,10 +341,22 @@
             </div>
           </a>
 
+          <a class="release" href="https://sophiamorrow.bandcamp.com/track/what-you-mean-to-me" target="_blank" rel="noopener" data-cursor="LISTEN">
+            <div class="release__cover">
+              <img src="images/sophia-what-you-mean-to-me.jpg" alt="What You Mean To Me cover">
+              <span class="release__play"><svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg></span>
+            </div>
+            <div class="release__meta">
+              <span class="release__artist">Sophia Morrow</span>
+              <span class="release__title">What You Mean To Me</span>
+              <span class="release__year">2025</span>
+            </div>
+          </a>
+
           <a class="release release--cta" href="https://vermontavenuerecords.bandcamp.com" target="_blank" rel="noopener" data-cursor="GO">
             <div class="release__cta-inner">
               <span class="release__cta-title">Stream it <span class="serif-it">all</span></span>
-              <span class="release__cta-sub">Every release on Bandcamp ↗</span>
+              <span class="release__cta-sub">Every release on Bandcamp<span class="arrow"> <svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg></span></span>
             </div>
           </a>
 
@@ -329,16 +370,16 @@
       <div class="live__left">
         <span class="section__label reveal">04 / LIVE</span>
         <h2 class="live__title reveal">Thursdays<br><span class="serif-it">on</span> the block</h2>
-        <p class="live__copy reveal">
-          Every Thursday, doors at 8PM — an open mic &amp; jam night at
-          <strong>The Stowaway, Downtown LA</strong>. Musicians and singers are
-          encouraged to play. Hosted by the house band, The LA Limes.
-        </p>
-        <div class="live__details reveal">
-          <div class="live__detail">
-            <span class="live__detail-k">Where</span>
-            <span class="live__detail-v">The Stowaway · DTLA</span>
-          </div>
+      <p class="live__copy reveal">
+           Every Thursday, doors at 8PM — an open mic &amp; jam night at
+           <strong>The Stowaway, Downtown LA</strong>. Musicians and singers are
+           encouraged to play. Hosted by the house band, The LA Limes.
+         </p>
+         <div class="live__details reveal">
+           <div class="live__detail">
+             <span class="live__detail-k">Where</span>
+             <span class="live__detail-v">The Stowaway · 416 S Spring St, DTLA <a class="live__map" href="https://www.google.com/maps/search/?api=1&query=The+Stowaway%2C+416+S+Spring+St%2C+Los+Angeles%2C+CA+90013" target="_blank" rel="noopener">Map<span class="arrow"> <svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg></span></a></span>
+           </div>
           <div class="live__detail">
             <span class="live__detail-k">When</span>
             <span class="live__detail-v">Every Thursday · Doors 8PM</span>
@@ -348,7 +389,7 @@
             <span class="live__detail-v">Your instrument · Your voice</span>
           </div>
         </div>
-        <a class="btn reveal" href="https://www.instagram.com/vermontavenuerecords" target="_blank" rel="noopener" data-cursor="GO">Follow for set times <span class="arrow">↗</span></a>
+        <a class="btn reveal" href="https://www.instagram.com/vermontavenuerecords" target="_blank" rel="noopener" data-cursor="GO">Follow for set times <span class="arrow"><svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg></span></a>
       </div>
       <div class="live__right">
         <canvas class="live__eq" id="liveEq" aria-hidden="true"></canvas>
@@ -366,7 +407,7 @@
       <form class="join__form reveal" id="joinForm" action="#" method="post">
         <label class="sr-only" for="email">Email address</label>
         <input class="join__input" id="email" type="email" name="email" placeholder="your@email.com" required>
-        <button class="join__btn" type="submit">Get notified <span class="arrow">↗</span></button>
+        <button class="join__btn" type="submit">Get notified <span class="arrow"><svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg></span></button>
       </form>
       <p class="join__note reveal">New releases, live dates, and members-only perks. No spam, ever.</p>
     </section>
@@ -391,7 +432,6 @@
         <span class="footer__h">Listen</span>
         <a href="https://vermontavenuerecords.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
         <a href="https://open.spotify.com/album/4jYvmYKoTEuG3QTdG6CeE5" target="_blank" rel="noopener">Spotify</a>
-        <a href="https://soundcloud.com/" target="_blank" rel="noopener">SoundCloud</a>
       </div>
       <div class="footer__col">
         <span class="footer__h">Connect</span>
@@ -407,7 +447,11 @@
     <div class="footer__base">
       <span>© <span id="year">2026</span> Vermont Avenue Records</span>
       <span>Created by musicians, for musicians.</span>
-      <span class="footer__top"><a href="#top">Back to top ↑</a></span>
+      <span class="footer__top"><a href="#top">Back to top<span class="arrow"> <svg class="icon" aria-hidden="true"><use href="#icon-up"></use></svg></span></a></span>
+    </div>
+    <div class="footer__credit">
+      Website created by
+      <a href="https://www.wyzdesign.com" target="_blank" rel="noopener">WYZ Design&trade;</a>
     </div>
   </footer>
 
