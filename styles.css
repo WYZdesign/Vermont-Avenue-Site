@@ -22,6 +22,10 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: auto; -webkit-text-size-adjust: 100%; }
+/* Dynamic viewport height: iOS collapses URL bar → 100vh jumps.
+   Modern browsers support 100dvh; older fall back to --vh set via JS. */
+html { height: 100dvh; height: calc(var(--vh, 1vh) * 100); }
+body { height: 100dvh; height: calc(var(--vh, 1vh) * 100); }
 
 body {
   background: var(--ink);
@@ -174,11 +178,12 @@ section { position: relative; }
 
 /* ============ HERO ============ */
 .hero {
-  min-height: 100vh;
+  min-height: 100dvh; min-height: calc(var(--vh, 1vh) * 100);
   display: flex; flex-direction: column;
   justify-content: center; align-items: center;
   overflow: hidden;
-  padding: 6rem 1rem 3rem;
+  padding: env(safe-area-inset-top) clamp(1.2rem, 4vw, 3rem);
+  padding-bottom: clamp(6rem, 12vh, 9rem);
 }
 .hero__eq {
   position: absolute; inset: 0;
@@ -286,7 +291,6 @@ section { position: relative; }
   will-change: transform;
 }
 .marquee__star { color: var(--amber); font-style: normal; }
-.marquee:hover .marquee__track { animation-play-state: paused; }
 
 /* ============ MANIFESTO ============ */
 .manifesto {
@@ -433,10 +437,19 @@ section { position: relative; }
   aspect-ratio: 1;
   overflow: hidden;
   margin-bottom: 1rem;
+  background: var(--panel);           /* fallback backdrop while image loads */
 }
 .release__cover img {
   width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.6s var(--ease), filter 0.4s ease;
+  opacity: 0;
+  transform: scale(1.03);              /* slight zoom-in while blurred */
+  filter: blur(4px);
+  transition: transform 0.6s var(--ease), filter 0.4s ease, opacity 0.45s ease;
+}
+.release__cover img.loaded {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
 }
 .release__play {
   position: absolute; inset: 0;
@@ -541,6 +554,7 @@ section { position: relative; }
   opacity: 0.5;
   border-radius: 50%;
   filter: blur(0);
+  transition: opacity 0.3s ease, filter 0.3s ease;
 }
 .live { overflow: hidden; }
 .live__disc {
@@ -675,6 +689,19 @@ section { position: relative; }
 .footer__credit a { color: var(--amber-soft); transition: color 0.3s ease; }
 .footer__credit a:hover { color: var(--amber); }
 
+/* ============ SCROLL-TO-TOP ============ */
+.scrollTop {
+  position: fixed; right: clamp(1rem, 3vw, 2rem); bottom: calc(2rem + env(safe-area-inset-bottom));
+  z-index: 100; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--panel); border: 1px solid var(--line); color: var(--amber);
+  display: none; align-items: center; justify-content: center;
+  cursor: pointer; overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.55);
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+.scrollTop:hover { background: var(--amber); color: var(--ink); border-color: var(--amber); transform: scale(1.1); box-shadow: 0 18px 40px rgba(255,162,51,0.28); }
+.scrollTop svg { width: 0.95em; height: 0.95em; }
+
 /* ============ REVEAL (hidden only once JS is confirmed live) ============ */
 body.js .reveal { opacity: 0; transform: translateY(28px); }
 body.js .reveal.fallback-visible { opacity: 1 !important; transform: none !important; }
@@ -696,8 +723,14 @@ body.js .reveal.fallback-visible { opacity: 1 !important; transform: none !impor
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .release { width: 62vw; }
   .releases__rail { padding-left: 1.2rem; }
-  .releases__viewport { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; touch-action: pan-x pan-y; }
+  .releases__viewport { position: relative; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; touch-action: pan-x pan-y; }
   .releases__viewport::-webkit-scrollbar { display: none; }
+  .releases__viewport { mask-image: linear-gradient(90deg, transparent 0%, var(--ink) 8%, var(--ink) 92%, transparent 100%); }
+  .releases__viewport::after {
+    content: ""; position: absolute; top: 0; right: 0; width: 3rem; height: 100%;
+    background: linear-gradient(90deg, transparent, var(--ink));
+    pointer-events: none;
+  }
   .hero__line { font-size: clamp(3.4rem, 17vw, 8rem); }
   .hero__line--avenue { -webkit-text-stroke-width: 1.5px; }
   .cursor { display: none; }
@@ -772,7 +805,6 @@ body.js .reveal.fallback-visible { opacity: 1 !important; transform: none !impor
 }
 .marquee__star svg { animation: star-twinkle 4s ease-in-out infinite; }
 .marquee:hover .marquee__star svg { animation-duration: 1.2s; }
-
 @keyframes pulse-fade {
   0%,100% { opacity: 0.45; } 50% { opacity: 1; }
 }
@@ -789,3 +821,8 @@ body.js .reveal.fallback-visible { opacity: 1 !important; transform: none !impor
 }
 .vinyl__disc { transition: transform 0.5s ease; }
 .hero:hover .vinyl__disc { transform: rotate(2deg) scale(1.02); }
+
+/* keyboard focus parity with hover */
+.release:focus-within .release__cover img { transform: scale(1.06); }
+.release:focus-within .release__play { opacity: 1; background: rgba(255,162,51,0.9); }
+.release:focus-within { transform: translateY(-4px) scale(1.02); }

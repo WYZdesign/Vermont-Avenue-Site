@@ -49,6 +49,16 @@ document.addEventListener("DOMContentLoaded", () => {
       dotX(e.clientX); dotY(e.clientY); ringX(e.clientX); ringY(e.clientY);
     });
 
+    // clear hover label while scrolling so it never sticks to a stale element
+    let clearTO = null;
+    lenis.on("scroll", () => {
+      if (clearTO) return;
+      cursor.classList.remove("is-hover");
+      clearTO = true;
+      clearTimeout(window.__clearHoverTO);
+      window.__clearHoverTO = setTimeout(() => { clearTO = null; }, 80);
+    });
+
     const setHover = (el, txt) => {
       cursor.classList.add("is-hover");
       label.textContent = txt || "";
@@ -137,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tl.from(".hero__meta", { opacity: 0, duration: 0.8, stagger: 0.1 }, 0.7);
     tl.from(".hero__vinyl", { scale: 0.6, opacity: 0, duration: 1, ease: "back.out(1.4)" }, 0.5);
     tl.from(".hero__scroll", { opacity: 0, duration: 0.6 }, 1.15);
-    tl.from(".hero__eq", { opacity: 0, duration: 1.2 }, 0.4);
+    tl.from(".hero__eq", { opacity: 0, duration: 1.2, ease: "power2.inOut" }, 1.6); // fade in last, after vinyl + title settle
   };
 
   if (prefersReduced) {
@@ -172,6 +182,56 @@ document.addEventListener("DOMContentLoaded", () => {
       onComplete: () => { preloader.style.display = "none"; counterTween.kill(); }
     });
   }
+
+   /* ---------- VIEWPORT HEIGHT SHIM (iOS URL-bar jank) ---------- */
+  const setVh = () => {
+    document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
+  };
+  setVh();
+  window.visualViewport && visualViewport.addEventListener("resize", setVh);
+  window.addEventListener("resize", setVh);
+  window.addEventListener("orientationchange", () => { setTimeout(setVh, 300); });
+
+  /* ---------- SCROLL-TO-TOP BUTTON ---------- */
+  const createScrollTop = () => {
+    const btn = document.createElement("button");
+    btn.className = "scrollTop";
+    btn.setAttribute("aria-label", "Back to top");
+    btn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-up"></use></svg>';
+    document.body.appendChild(btn);
+    btn.addEventListener("click", () => lenis.scrollTo(0, { duration: 1.2, offset: 0 }));
+    btn.style.display = "none";
+    gsap.set(btn, { opacity: 0, y: 30 });
+    // show after 320px scroll
+    ScrollTrigger.create({
+      start: "top -320",
+      onEnter: () => showBtn(btn),
+      onLeaveBack: () => hideBtn(btn)
+    });
+    ScrollTrigger.create({
+      start: "top -320", end: "top -300",
+      onEnterBack: () => showBtn(btn),
+      onLeave: () => hideBtn(btn)
+    });
+    return btn;
+  };
+  const showBtn = (btn) => {
+    if (!btn) return;
+    btn.style.display = "flex";
+    gsap.to(btn, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
+  };
+  const hideBtn = (btn) => {
+    if (!btn) return;
+    gsap.to(btn, { opacity: 0, y: 20, duration: 0.3, ease: "power2.in", onComplete: () => { btn.style.display = "none"; } });
+  };
+
+  const scrollTopBtn = (isTouch || prefersReduced) ? null : createScrollTop();
+
+   /* ---------- IMAGE LOAD CLASS (blur-up LQIP) ---------- */
+  document.querySelectorAll("img").forEach((img) => {
+    if (img.complete) img.classList.add("loaded");
+    else img.addEventListener("load", () => img.classList.add("loaded"));
+  });
 
   /* ---------- CANVAS EQUALIZER ---------- */
   const initEq = (canvas) => {
@@ -244,6 +304,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll("#eqCanvas, #liveEq").forEach(initEq);
 
+  gsap.to(".live__eq", {
+    opacity: 0.15,
+    filter: "blur(6px)",
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".live",
+      start: "top bottom",
+      end: "center center",
+      scrub: 1
+    }
+  });
+
   /* ---------- ROTATING DISCS ---------- */
   gsap.to("#heroVinyl .vinyl__disc", { rotation: 360, transformOrigin: "50% 50%", duration: 16, repeat: -1, ease: "none" });
   gsap.to(".live__disc", { rotation: 360, transformOrigin: "50% 50%", duration: 22, repeat: -1, ease: "none" });
@@ -258,13 +330,27 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
   });
 
-  /* ---------- MARQUEE ---------- */
-  gsap.to(".marquee__track", {
-    xPercent: -50,
-    ease: "none",
-    duration: 26,
-    repeat: -1
-  });
+  /* ---------- MARQUEE (GSAP, pauseable on hover) ---------- */
+  const track = document.querySelector(".marquee__track");
+  if (track && !prefersReduced) {
+    const dist = track.scrollWidth - track.clientWidth;
+    const mv = gsap.to(track, {
+      x: () => -dist,
+      ease: "none",
+      duration: 26,
+      repeat: -1,
+      modifiers: {
+        x: (v) => `${parseFloat(v) % dist}px`
+      }
+    });
+    const marquee = document.querySelector(".marquee");
+    if (marquee) {
+      marquee.addEventListener("mouseenter", () => mv.pause());
+      marquee.addEventListener("mouseleave", () => mv.resume());
+    }
+  } else if (track) {
+    /* fallback: keep it moving via CSS for no-JS/reduced-motion path is already handled by .marquee:hover rule kept in CSS for touch */
+  }
 
   /* ---------- GENERIC REVEALS ---------- */
   gsap.utils.toArray(".reveal").forEach((el) => {
@@ -291,10 +377,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ---------- ROSTER FLOATING IMAGES ---------- */
-  if (!isTouch) {
-    document.querySelectorAll(".roster__row").forEach((row) => {
-      const img = row.querySelector(".roster__img");
-      const name = row.querySelector(".roster__name");
+  document.querySelectorAll(".roster__row").forEach((row) => {
+    const img = row.querySelector(".roster__img");
+    const name = row.querySelector(".roster__name");
+
+    // touch feedback: rows don't have hover; dim default, brighten on tap
+    if (isTouch) {
+      row.style.opacity = "0.75";
+      row.style.transition = "opacity 0.2s ease";
+      row.addEventListener("touchstart", () => { row.style.opacity = "1"; });
+      row.addEventListener("touchend", () => { row.style.opacity = "0.75"; });
+    }
+
+    if (img && !isTouch && !prefersReduced) {
       const rectOf = () => row.getBoundingClientRect();
       const imgY = gsap.quickTo(img, "y", { duration: 0.3, ease: "power3.out" });
 
@@ -311,8 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
         gsap.to(img, { xPercent: -120, scale: 0.8, rotate: -4, opacity: 0, duration: 0.35, ease: "power3.out" });
         gsap.to(name, { x: 0, duration: 0.45, ease: "power3.out" });
       });
-    });
-  }
+    }
 
   /* ---------- RELEASES HORIZONTAL RAIL ---------- */
   const releasesSection = document.querySelector(".releases");
