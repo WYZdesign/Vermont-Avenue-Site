@@ -1,5 +1,5 @@
 /* WYZMIND site shell — cache-first app shell w/ network-first navigation */
-const CACHE = "var-site-v1";
+const CACHE = "var-site-v2";
 const ASSETS = [
   "/",
   "/index.html",

@@ -81,9 +81,13 @@ e5f02e5 2026-08-10 feat: super-slow EQ, SVG icon system, favicon/PWA suite, mobi
    No GoDaddy/DNS credential exists in the vault yet; that is the blocker.
 2. **Newsletter is a frontend placeholder** — `script.js:442-462` fakes success; `#joinForm`
    posts nowhere. Wire a real endpoint (Vercel function / Mailchimp / Resend).
-3. Commit `gen_share_image.py` (and decide on `og-share.jpg`).
-4. `sw.js` cache name is `"var-site-v1"` (fine) — bump on any shell change.
-5. Optional: `robots.txt`, `sitemap.xml`, JSON-LD (MusicGroup/Organization), analytics.
+3. ~~Commit `gen_share_image.py`~~ **DONE** (generator now tracked; `images/og-share.jpg`
+   remains an unused stray artefact — delete only with owner confirmation).
+4. ~~`sw.js` cache bump~~ **DONE** — now `var-site-v2`.
+5. ~~robots/sitemap/JSON-LD~~ **DONE** — added `robots.txt`, `sitemap.xml`, canonical +
+   `og:url`, and `Organization` JSON-LD (members = 5 artists) in `index.html`.
+   Still open: **analytics** (needs a provider/ID decision).
+6. **Newsletter backend** still open (see item 2). **Custom-domain DNS** still open (item 1).
 
 ## 9. RULES
 - No build step: edit source, commit to `main`, Vercel auto-deploys. Verify with
