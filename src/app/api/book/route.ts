@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isDbConfigured, query } from "@/lib/db";
 
 type Payload = Record<string, unknown>;
 
@@ -36,6 +37,12 @@ export async function POST(request: Request) {
   const email = text(payload, "email");
   const eventType = text(payload, "eventType");
   const act = text(payload, "act");
+  const phone = text(payload, "phone");
+  const eventDate = text(payload, "eventDate");
+  const venue = text(payload, "venue");
+  const guests = text(payload, "guests");
+  const budget = text(payload, "budget");
+  const message = text(payload, "message");
 
   if (!name || !email || !eventType || !act) {
     return NextResponse.json(
@@ -57,20 +64,45 @@ export async function POST(request: Request) {
   const fields: Array<[string, string]> = [
     ["Name", name],
     ["Email", email],
-    ["Phone", text(payload, "phone")],
-    ["Event date", text(payload, "eventDate")],
+    ["Phone", phone],
+    ["Event date", eventDate],
     ["Event type", eventType],
     ["Act", act],
-    ["Venue", text(payload, "venue")],
-    ["Guests", text(payload, "guests")],
-    ["Budget", text(payload, "budget")],
-    ["Message", text(payload, "message")],
+    ["Venue", venue],
+    ["Guests", guests],
+    ["Budget", budget],
+    ["Message", message],
   ];
 
   const summary = fields
     .filter(([, value]) => value)
     .map(([label, value]) => label + ": " + value)
     .join("\n");
+
+  let stored = false;
+  if (isDbConfigured()) {
+    try {
+      await query(
+        `insert into bookings (name, email, phone, event_date, event_type, act, venue, guests, budget, message)
+         values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+        [
+          name,
+          email,
+          phone || null,
+          eventDate || null,
+          eventType,
+          act,
+          venue || null,
+          guests || null,
+          budget || null,
+          message || null,
+        ]
+      );
+      stored = true;
+    } catch (error) {
+      console.error("[booking] storage failed", error);
+    }
+  }
 
   const to = process.env.BOOKING_TO_EMAIL;
   const apiKey = process.env.RESEND_API_KEY;
@@ -112,17 +144,20 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       console.error("[booking] email failed", response.status, await response.text());
+      if (stored) {
+        return NextResponse.json({ ok: true, delivery: "email-failed", stored: true });
+      }
       return NextResponse.json(
         { ok: false, error: "We could not send the request. Please try again." },
         { status: 502 }
       );
     }
 
-    return NextResponse.json({ ok: true, delivery: "email" });
+    return NextResponse.json({ ok: true, delivery: "email", stored });
   }
 
   // Test mode: no email configured yet. The request is accepted and logged so
   // the public form works while the inbox/DB is being wired.
   console.log("[booking] (email not configured)\n" + summary);
-  return NextResponse.json({ ok: true, delivery: "test" });
+  return NextResponse.json({ ok: true, delivery: "test", stored });
 }
