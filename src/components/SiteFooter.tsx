@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/lib/content";
 import { Logo } from "./Logo";
+import { NewsletterForm } from "./NewsletterForm";
 
 const columns = [
   {
@@ -33,6 +34,7 @@ const columns = [
     links: [
       { label: "Instagram", href: site.instagram },
       { label: "Facebook", href: site.facebook },
+      { label: "Sign in", href: "/login" },
     ],
   },
 ];
@@ -76,6 +78,24 @@ export function SiteFooter() {
               </ul>
             </div>
           ))}
+        </div>
+
+        <div className="border-t border-[var(--line-invert)] py-8">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h3 className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[var(--color-sage)]">
+                Join the block list
+              </h3>
+              <p className="mt-2 text-sm text-[rgba(244,241,232,0.6)]">
+                New releases, live dates, and label news. No spam.
+              </p>
+            </div>
+            {process.env.DATABASE_URL ? (
+              <NewsletterForm />
+            ) : (
+              <p className="text-sm text-[rgba(244,241,232,0.6)]">The list opens soon.</p>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-col gap-3 border-t border-[var(--line-invert)] pt-6 text-[0.68rem] uppercase tracking-[0.16em] text-[rgba(244,241,232,0.42)] sm:flex-row sm:items-center sm:justify-between">
