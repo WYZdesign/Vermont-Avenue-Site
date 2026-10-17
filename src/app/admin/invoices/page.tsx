@@ -1,6 +1,7 @@
 import { query } from "@/lib/db";
 import type { Invoice } from "@/lib/types";
 import { createInvoiceAction } from "../actions";
+import { StripeLinkButton } from "./StripeLinkButton";
 
 export const dynamic = "force-dynamic";
 
@@ -81,13 +82,19 @@ export default async function AdminInvoicesPage() {
                 <td className="p-3 text-xs uppercase tracking-[0.12em]">{row.status}</td>
                 <td className="p-3 text-xs">{row.due_date || "—"}</td>
                 <td className="p-3 text-xs">
-                  {row.stripe_payment_link ? (
-                    <a href={row.stripe_payment_link} target="_blank" rel="noopener noreferrer" className="underline">
-                      Open
-                    </a>
-                  ) : (
-                    "—"
-                  )}
+                  <div className="flex flex-col gap-1">
+                    {row.stripe_payment_link && (
+                      <a
+                        href={row.stripe_payment_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline"
+                      >
+                        Open
+                      </a>
+                    )}
+                    <StripeLinkButton id={row.id} />
+                  </div>
                 </td>
                 <td className="p-3 whitespace-nowrap text-xs muted">
                   {new Date(row.created_at).toLocaleDateString()}

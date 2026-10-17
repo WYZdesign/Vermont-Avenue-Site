@@ -86,3 +86,22 @@ export async function updateContentAction(form: FormData): Promise<void> {
   );
   revalidatePath("/admin/content");
 }
+
+export async function createLogisticsAction(form: FormData): Promise<void> {
+  await requireAdmin();
+  const eventDate = str(form, "event_date");
+  await query(
+    `insert into logistics (event_date, venue, crew, equipment, checklist, status, notes)
+     values ($1, $2, $3, $4, $5, $6, $7)`,
+    [
+      eventDate || null,
+      str(form, "venue") || null,
+      str(form, "crew") || null,
+      str(form, "equipment") || null,
+      str(form, "checklist") || null,
+      str(form, "status") || "planning",
+      str(form, "notes") || null,
+    ]
+  );
+  revalidatePath("/admin/logistics");
+}

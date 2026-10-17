@@ -77,3 +77,16 @@ export type ContentBlock = {
   value: string;
   updated_at: string;
 };
+
+export type Logistics = {
+  id: string;
+  booking_id: string | null;
+  event_date: string | null;
+  venue: string | null;
+  crew: string | null;
+  equipment: string | null;
+  checklist: string | null;
+  status: string;
+  notes: string | null;
+  created_at: string;
+};

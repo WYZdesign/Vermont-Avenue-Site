@@ -89,6 +89,19 @@ create table if not exists subscribers (
   created_at timestamptz not null default now()
 );
 
+create table if not exists logistics (
+  id uuid primary key default gen_random_uuid(),
+  booking_id uuid references bookings(id) on delete set null,
+  event_date date,
+  venue text,
+  crew text,
+  equipment text,
+  checklist text,
+  status text not null default 'planning',
+  notes text,
+  created_at timestamptz not null default now()
+);
+
 create table if not exists content_blocks (
   key text primary key,
   value text not null,
@@ -102,3 +115,4 @@ create index if not exists idx_sessions_token on sessions(token_hash);
 create index if not exists idx_sessions_user on sessions(user_id);
 create index if not exists idx_invoices_status on invoices(status);
 create index if not exists idx_clients_email on clients(lower(email));
+create index if not exists idx_logistics_date on logistics(event_date);

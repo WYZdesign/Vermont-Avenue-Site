@@ -12,6 +12,7 @@ const links: Array<[string, string]> = [
   ["Invoices", "/admin/invoices"],
   ["Contracts", "/admin/contracts"],
   ["Campaigns", "/admin/campaigns"],
+  ["Logistics", "/admin/logistics"],
   ["Subscribers", "/admin/subscribers"],
   ["Content", "/admin/content"],
 ];
