@@ -102,14 +102,11 @@ python W:\WYZ_Command_Center\wyz_deploy_check_va.py <sha>   # must say DEPLOY IS
    - `@` A -> `216.150.1.1` (remove `76.223.105.230` / `13.248.243.5`)
    - `www` CNAME -> `d55b16a5956c8bad.vercel-dns-016.com`
    Verify with Vercel: the domain config should stop reporting `misconfigured: true`.
-2. **Admin backend (v1 built, needs a database URL).** Free tier: Neon Postgres.
-   Supabase Pro later. Run `npm run db:migrate` and `npm run db:seed` against the
-   Neon URL, then set `DATABASE_URL`, `OWNER_EMAIL`, `OWNER_PASSWORD`, and
-   `COOKIE_SECURE=true` in Vercel. Until then the admin is disabled and the
-   newsletter form hides; booking intake still works in test mode.
-3. **Admin v1 modules built:** bookings/status, clients, invoices (with a Stripe
-   link field), contracts, campaigns, subscribers, and content blocks.
-   Still to wire: Stripe API, e-sign, real campaign sending, GA4 reporting.
+2. ~~Admin backend v1~~ **DONE.** Neon `super-cherry-67821789` is live; the admin
+   is active at `/admin` and bookings persist.
+3. **Admin v1 modules live:** bookings/status, clients, invoices, contracts,
+   campaigns, logistics, subscribers, content. Stripe link scaffolding is in
+   (needs the key). Still open: e-sign, real campaign sending, GA4 reporting.
 4. **Accounts:** John needs a Stripe account and a business email. Resend + e-sign
    can follow. Build in test mode until keys exist.
 5. **Pricing:** `priceFrom` is `null` in `src/lib/content.ts`; the site says
@@ -127,27 +124,28 @@ python W:\WYZ_Command_Center\wyz_deploy_check_va.py <sha>   # must say DEPLOY IS
 
 ## 10. ADMIN BACKEND (added 2026-09-26)
 - **DB:** Postgres via `pg`. Local dev container `va-postgres` on port 5433;
-  production = Neon free (pooled `DATABASE_URL`). Supabase Pro later.
-- **Auth:** scrypt password hashes, `va_session` HttpOnly cookie, 30 days.
+  production = **Neon** project `super-cherry-67821789` (`aws-us-east-2`, PG 17).
+  Supabase Pro later.
+- **Production env (set in Vercel):** `DATABASE_URL` (pooled),
+  `DATABASE_URL_UNPOOLED` (direct), `OWNER_EMAIL`, `OWNER_PASSWORD`,
+  `COOKIE_SECURE=true`, `NEXT_PUBLIC_SITE_URL`.
+- **Vault keys:** `VERMONT_DATABASE_URL`, `VERMONT_DATABASE_URL_DIRECT`,
+  `VERMONT_OWNER_EMAIL`, `VERMONT_OWNER_PASSWORD`, `NEON_API_KEY`.
+- **Owner login:** `owner@vermontavenuerecords.com` (password in the vault).
+  Change to John's real business email/password when it exists.
+- **Status:** production admin is LIVE at `/admin`; bookings persist to Neon.
+  Booking notification email still reports `delivery: "test"` until
+  `RESEND_API_KEY` + `BOOKING_TO_EMAIL` are set.
+- **Auth:** scrypt hashes, `va_session` HttpOnly cookie, 30 days.
   Roles: `owner`, `team`, `client`, `fan`.
 - **Tables:** `users`, `sessions`, `bookings`, `clients`, `invoices`, `contracts`,
-  `campaigns`, `subscribers`, `content_blocks`.
+  `campaigns`, `logistics`, `subscribers`, `content_blocks`.
 - **Routes:** `/login`, `/signup`, `/account`, `/admin` (overview, bookings,
-  clients, invoices, contracts, campaigns, subscribers, content).
+  clients, invoices, contracts, campaigns, logistics, subscribers, content).
   APIs: `/api/auth/login|logout|signup`, `/api/admin/bookings/[id]`,
-  `/api/subscribe`, `/api/book`.
-- **Commands:**
-  ```
-  docker start va-postgres   # local DB (port 5433)
-  npm run db:migrate
-  npm run db:seed
-  ```
-  Local dev env lives in `.env.local` (gitignored). Template: `.env.example`.
-- **Production activation:** create the Neon project, put the pooled URL in Vercel
-  as `DATABASE_URL`, set `OWNER_EMAIL`/`OWNER_PASSWORD`, run migrate + seed
-  once against it, redeploy.
-- Without `DATABASE_URL`, the public booking form still accepts requests in test
-  mode, but accounts/admin/newsletter are disabled by design.
+  `/api/admin/invoices/[id]/stripe`, `/api/subscribe`, `/api/book`.
+- **Local commands:** `docker start va-postgres`, `npm run db:migrate`,
+  `npm run db:seed`. Env template: `.env.example`.
 
 ## 11. RULES
 - No framework surprises: this is Next App Router. Do not add a second router or build tool.
