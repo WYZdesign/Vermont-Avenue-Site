@@ -94,6 +94,17 @@ export default function LivePage() {
             <p className="serif mt-4 text-xl text-forest">
               Open mic, every Thursday, The Stowaway.
             </p>
+            <div className="mt-4 border border-[var(--line)]">
+              <iframe
+                title="The Stowaway map"
+                src="https://www.google.com/maps?q=The+Stowaway,+416+S+Spring+St,+Los+Angeles,+CA+90013&output=embed"
+                width="100%"
+                height="280"
+                loading="lazy"
+                style={{ border: 0 }}
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
         </div>
       </section>

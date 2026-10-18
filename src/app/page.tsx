@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ActCard } from "@/components/ActCard";
 import { Marquee } from "@/components/Marquee";
-import { ReleaseCard } from "@/components/ReleaseCard";
+import { ReleaseItem } from "@/components/ReleaseItem";
 import { SectionLabel } from "@/components/SectionLabel";
 import { about, acts, liveNight, releases, roster, site } from "@/lib/content";
 
@@ -181,7 +181,7 @@ export default function HomePage() {
           </div>
           <div className="mt-10 grid grid-cols-2 gap-5 lg:grid-cols-4">
             {featuredReleases.map((release) => (
-              <ReleaseCard key={release.url + release.cover} release={release} />
+              <ReleaseItem key={release.url + release.cover} release={release} />
             ))}
           </div>
         </div>

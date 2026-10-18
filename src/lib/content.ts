@@ -270,6 +270,8 @@ export type Release = {
   cover: string;
   url: string;
   spotify?: string;
+  embed?: string;
+  embedType?: "album" | "track";
 };
 
 export const releases: Release[] = [
@@ -279,6 +281,8 @@ export const releases: Release[] = [
     year: "2025",
     cover: "/images/freshly-squeezed.jpg",
     url: "https://thelalimes.bandcamp.com/album/freshly-squeezed",
+    embed: "https://bandcamp.com/EmbeddedPlayer/album=1787920115/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
+    embedType: "album",
   },
   {
     artist: "The Dante's Inferno",
@@ -286,6 +290,8 @@ export const releases: Release[] = [
     year: "2025",
     cover: "/images/descent.jpg",
     url: "https://tdantesinferno.bandcamp.com/album/descent",
+    embed: "https://bandcamp.com/EmbeddedPlayer/album=3292329643/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
+    embedType: "album",
   },
   {
     artist: "The Dante's Inferno",
@@ -293,6 +299,8 @@ export const releases: Release[] = [
     year: "2025",
     cover: "/images/grid-failure.jpg",
     url: "https://tdantesinferno.bandcamp.com/album/grid-failure",
+    embed: "https://bandcamp.com/EmbeddedPlayer/album=3982058973/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
+    embedType: "album",
   },
   {
     artist: "The Dante's Inferno",
@@ -301,6 +309,8 @@ export const releases: Release[] = [
     cover: "/images/deal-with-the-devil.jpg",
     url: "https://tdantesinferno.bandcamp.com",
     spotify: "https://open.spotify.com/album/4jYvmYKoTEuG3QTdG6CeE5",
+    embed: "https://bandcamp.com/EmbeddedPlayer/album=2682256908/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
+    embedType: "album",
   },
   {
     artist: "Ryan Washington",
@@ -308,6 +318,8 @@ export const releases: Release[] = [
     year: "2025",
     cover: "/images/ryan-turn-your-heart.jpg",
     url: "https://ryanwashington.bandcamp.com/track/turn-your-heart-to-mine",
+    embed: "https://bandcamp.com/EmbeddedPlayer/track=1866020265/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
+    embedType: "track",
   },
   {
     artist: "Ryan Washington x Sophia Morrow",
@@ -315,6 +327,8 @@ export const releases: Release[] = [
     year: "2026",
     cover: "/images/ryan-used-to-be.jpg",
     url: "https://ryanwashington.bandcamp.com/track/what-used-to-be",
+    embed: "https://bandcamp.com/EmbeddedPlayer/track=1913791062/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
+    embedType: "track",
   },
   {
     artist: "Sophia Morrow x Ryan Washington",
@@ -322,6 +336,8 @@ export const releases: Release[] = [
     year: "2026",
     cover: "/images/sophia-used-to-be.jpg",
     url: "https://sophiamorrow.bandcamp.com/track/what-used-to-be",
+    embed: "https://bandcamp.com/EmbeddedPlayer/track=3769876458/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
+    embedType: "track",
   },
   {
     artist: "Isaiah Harden",
@@ -329,6 +345,8 @@ export const releases: Release[] = [
     year: "2026",
     cover: "/images/therapy.jpg",
     url: "https://isaiahharden.bandcamp.com/album/therapy",
+    embed: "https://bandcamp.com/EmbeddedPlayer/album=1115039623/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
+    embedType: "album",
   },
   {
     artist: "Sophia Morrow",
@@ -336,6 +354,8 @@ export const releases: Release[] = [
     year: "2025",
     cover: "/images/sophia-what-you-mean-to-me.jpg",
     url: "https://sophiamorrow.bandcamp.com/track/what-you-mean-to-me",
+    embed: "https://bandcamp.com/EmbeddedPlayer/track=933679140/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
+    embedType: "track",
   },
 ];
 

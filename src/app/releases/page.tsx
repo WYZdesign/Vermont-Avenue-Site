@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero, SectionLabel } from "@/components/SectionLabel";
-import { ReleaseCard } from "@/components/ReleaseCard";
+import { ReleaseItem } from "@/components/ReleaseItem";
 import { releases, site } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default function ReleasesPage() {
         <div className="wrap">
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
             {releases.map((release) => (
-              <ReleaseCard key={release.url + release.cover} release={release} />
+              <ReleaseItem key={release.url + release.cover} release={release} />
             ))}
           </div>
         </div>
