@@ -72,6 +72,38 @@ export default async function AdminHome() {
         ))}
       </div>
 
+      <div className="border border-[var(--line)] bg-bone p-5">
+        <div className="flex items-center justify-between gap-3 mb-3">
+          <h2 className="h3">Band Ops (external)</h2>
+          <Link
+            href="https://noco.wyzmind.tech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[0.6rem] uppercase tracking-[0.14em] underline transition-colors hover:text-[var(--color-forest)]"
+          >
+            Open NocoDB
+          </Link>
+        </div>
+        <p className="text-[0.62rem] text-fog mb-4">
+          Roster, show calendar, and task tracking for DJs, solos, bands, and crew.
+          Opens in a new window.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-3">
+          <div className="border border-[var(--line-soft)] p-3 text-center">
+            <p className="text-[0.58rem] uppercase tracking-[0.14em] opacity-60 mb-1">Bands</p>
+            <p className="display text-2xl mt-1">View roster</p>
+          </div>
+          <div className="border border-[var(--line-soft)] p-3 text-center">
+            <p className="text-[0.58rem] uppercase tracking-[0.14em] opacity-60 mb-1">Shows</p>
+            <p className="display text-2xl mt-1">Calendar</p>
+          </div>
+          <div className="border border-[var(--line-soft)] p-3 text-center">
+            <p className="text-[0.58rem] uppercase tracking-[0.14em] opacity-60 mb-1">Tasks</p>
+            <p className="display text-2xl mt-1">To-do list</p>
+          </div>
+        </div>
+      </div>
+
       <div>
         <div className="flex items-end justify-between">
           <h2 className="h3">Recent bookings</h2>

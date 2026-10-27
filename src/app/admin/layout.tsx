@@ -15,6 +15,7 @@ const links: Array<[string, string]> = [
   ["Logistics", "/admin/logistics"],
   ["Subscribers", "/admin/subscribers"],
   ["Content", "/admin/content"],
+  ["Bands & Shows", "https://noco.wyzmind.tech"],
 ];
 
 export default async function AdminLayout({
