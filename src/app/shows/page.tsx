@@ -15,13 +15,13 @@ type ShowsResponse = {
   list: NocoRecord[];
 };
 
-async function fetchShows() {
+async function fetchShows(): Promise<NocoRecord[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/noco/shows?table=Shows&limit=100`, {
     cache: "no-store",
   });
   if (!res.ok) return [];
-  const data = await res.json();
-  return data.list || [];
+  const data = (await res.json()) as ShowsResponse;
+  return data.list ?? [];
 }
 
 function parseDate(dateStr: string | undefined) {
@@ -32,9 +32,9 @@ function parseDate(dateStr: string | undefined) {
 }
 
 export default async function ShowsPage() {
-  const shows = await fetchShows();
+  const shows: NocoRecord[] = await fetchShows();
 
-  const upcoming = shows.filter((s) => !s.Date || new Date(s.Date) >= new Date());
+  const upcoming = shows.filter((s: NocoRecord) => !s.Date || new Date(s.Date) >= new Date());
   const past = shows.filter((s) => s.Date && new Date(s.Date) < new Date());
 
   return (
@@ -49,7 +49,7 @@ export default async function ShowsPage() {
       )}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {upcoming.map((show) => (
+        {upcoming.map((show: NocoRecord) => (
           <div
             key={show.id}
             className="border border-[var(--line)] bg-[color:var(--color-paper)] p-5 transition-colors hover:border-[var(--color-forest)]"
