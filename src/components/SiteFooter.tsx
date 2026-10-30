@@ -27,6 +27,7 @@ const columns = [
       { label: "Bandcamp", href: site.bandcamp },
       { label: "Spotify", href: site.spotify },
       { label: "YouTube", href: site.youtube },
+      { label: "TikTok", href: site.tiktok },
     ],
   },
   {

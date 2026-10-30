@@ -90,7 +90,7 @@ const jsonLd = {
   description: site.description,
   foundingDate: site.founded,
   foundingLocation: { "@type": "Place", name: site.location },
-  sameAs: [site.bandcamp, site.instagram, site.facebook, site.youtube],
+  sameAs: [site.bandcamp, site.instagram, site.facebook, site.youtube, site.tiktok],
 };
 
 export default function RootLayout({

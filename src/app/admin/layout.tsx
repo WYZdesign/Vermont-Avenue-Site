@@ -15,7 +15,8 @@ const links: Array<[string, string]> = [
   ["Logistics", "/admin/logistics"],
   ["Subscribers", "/admin/subscribers"],
   ["Content", "/admin/content"],
-  ["Bands & Shows", "https://noco.wyzmind.tech"],
+  ["Shows", "/shows"],
+  ["Roster", "/about"],
 ];
 
 export default async function AdminLayout({
@@ -50,7 +51,7 @@ export default async function AdminLayout({
             <Link
               key={href}
               href={href}
-              className="border border-[var(--line)] px-3 py-2 text-[0.66rem] uppercase tracking-[0.14em] transition-colors hover:bg-ink hover:text-bone"
+              className="border border-[var(--line)] px-3 py-2 text-[0.66rem] uppercase tracking-[0.14em] transition-colors hover:bg-ink hover:text-white"
             >
               {label}
             </Link>

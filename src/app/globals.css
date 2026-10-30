@@ -512,3 +512,27 @@ textarea {
 .link-arrow:hover::after {
   transform: translateX(4px);
 }
+
+/* ---------- contrast guard ----------
+   Any dark surface gets white text, including hover and active states. */
+.bg-ink,
+.bg-coal,
+.bg-forest,
+.btn,
+.dark,
+.card:hover,
+.hover\:bg-ink:hover,
+.hover\:bg-forest:hover {
+  color: #ffffff;
+}
+
+.bg-ink a,
+.bg-coal a,
+.bg-forest a,
+.btn a,
+.dark a,
+.card:hover a,
+.hover\:bg-ink:hover a,
+.hover\:bg-forest:hover a {
+  color: inherit;
+}

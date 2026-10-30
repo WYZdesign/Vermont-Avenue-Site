@@ -10,6 +10,7 @@ export const site = {
   instagram: "https://www.instagram.com/vermontavenuerecords",
   facebook: "https://www.facebook.com/profile.php?id=61576277474112",
   youtube: "https://www.youtube.com/@VermontAvenueRecords",
+  tiktok: "https://www.tiktok.com/@vermontavenuerecords",
   bandcamp: "https://vermontavenuerecords.bandcamp.com",
   spotify: "https://open.spotify.com/album/4jYvmYKoTEuG3QTdG6CeE5",
 } as const;

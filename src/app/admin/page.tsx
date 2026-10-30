@@ -64,7 +64,7 @@ export default async function AdminHome() {
           <Link
             key={label}
             href={href}
-            className="border border-[var(--line)] bg-bone p-5 transition-colors hover:bg-ink hover:text-bone"
+            className="border border-[var(--line)] bg-bone p-5 transition-colors hover:bg-ink hover:text-white"
           >
             <p className="text-[0.6rem] uppercase tracking-[0.2em] opacity-60">{label}</p>
             <p className="display mt-2 text-3xl">{value}</p>
