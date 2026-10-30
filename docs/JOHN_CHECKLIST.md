@@ -46,16 +46,13 @@ Use the exact same name, address, and phone on both.
 
 ---
 
-## 4. Your Domain
+## 4. Your Domain (already handled)
 
 Your site is **vermontavenuerecords.com**.
 
-1. Go to **whois.com** and look it up.
-2. Log in to the company you bought it from.
-3. Turn on **auto renew**.
-4. Save the login.
+It is on GoDaddy and auto-renews in June 2028. No action needed.
 
-If you do not have the login, tell Torreé.
+Torreé is connecting it to the new site. Until that is done, the live site is the Vercel link Torreé will send you.
 
 ---
 
@@ -90,11 +87,10 @@ Use this line everywhere:
 
 ## If That Is Too Much
 
-Do only these four:
+Do only these three:
 
 1. Create and verify the Google Business Profile.
 2. Get ten Google reviews.
-3. Confirm the domain is on auto renew.
-4. Set up one contact email.
+3. Set up one contact email.
 
 That puts you ahead of most small labels.
