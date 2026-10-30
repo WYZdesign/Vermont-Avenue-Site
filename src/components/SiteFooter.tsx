@@ -24,6 +24,7 @@ const columns = [
   {
     title: "Listen",
     links: [
+      { label: "Watch", href: "/watch" },
       { label: "Bandcamp", href: site.bandcamp },
       { label: "Spotify", href: site.spotify },
       { label: "YouTube", href: site.youtube },
