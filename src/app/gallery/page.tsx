@@ -21,7 +21,7 @@ const categories = [
   "Social",
   "Cover Art",
   "Flyers & Posters",
-  "Logos",
+  "Branding",
   "Merch",
 ];
 

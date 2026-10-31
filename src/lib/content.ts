@@ -361,23 +361,20 @@ export type GalleryItem = {
   type: "image" | "video";
   src: string;
   alt: string;
-  category: "rehearsal" | "shoot" | "event" | "social" | "cover" | "flyer" | "logo" | "merch";
+  category: "rehearsal" | "shoot" | "event" | "social" | "cover" | "flyer" | "brand" | "merch";
   title?: string;
   description?: string;
   videoId?: string; // for YouTube embeds
 };
 
 export const gallery: GalleryItem[] = [
-  // Brand logos from the shared Graphics folder
-  { id: "logo-1", type: "image", src: "/images/gallery/logo-1.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
-  { id: "logo-2", type: "image", src: "/images/gallery/logo-2.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
-  { id: "logo-3", type: "image", src: "/images/gallery/logo-3.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
-  { id: "logo-4", type: "image", src: "/images/gallery/logo-4.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
-  { id: "logo-5", type: "image", src: "/images/gallery/logo-5.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
-  { id: "logo-6", type: "image", src: "/images/gallery/logo-6.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
-  { id: "logo-7", type: "image", src: "/images/gallery/logo-7.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
-  // Flyer from the shared Graphics folder
-  { id: "flyer-1", type: "image", src: "/images/gallery/flyer-1.jpg", alt: "Vermont Avenue Records flyer", category: "flyer", title: "Flyer" },
+  // The Dante's Inferno brand assets from the shared Graphics folder
+  { id: "brand-1", type: "image", src: "/images/gallery/brand-tdi-emblem.jpg", alt: "The Dante's Inferno TDI emblem", category: "brand", title: "The Dante's Inferno emblem" },
+  { id: "brand-2", type: "image", src: "/images/gallery/brand-tdi-pyramid.jpg", alt: "The Dante's Inferno inverted pyramid mark", category: "brand", title: "Inverted pyramid mark" },
+  { id: "brand-3", type: "image", src: "/images/gallery/brand-tdi-identity.jpg", alt: "The Dante's Inferno identity system", category: "brand", title: "Identity system" },
+  { id: "brand-4", type: "image", src: "/images/gallery/brand-tdi-concepts-light.jpg", alt: "The Dante's Inferno triangle concepts", category: "brand", title: "Triangle concepts" },
+  { id: "brand-5", type: "image", src: "/images/gallery/brand-tdi-concepts-dark.jpg", alt: "The Dante's Inferno concept exploration", category: "brand", title: "Concept exploration" },
+  { id: "brand-6", type: "image", src: "/images/gallery/brand-tdi-flyer.jpg", alt: "The Dante's Inferno at the Rhythm Room, DTLA", category: "flyer", title: "Live at the Rhythm Room" },
   // Cover art
   { id: "cover-1", type: "image", src: "/images/freshly-squeezed.jpg", alt: "Freshly Squeezed cover", category: "cover", title: "Freshly Squeezed" },
   { id: "cover-2", type: "image", src: "/images/descent.jpg", alt: "Descent cover", category: "cover", title: "Descent" },
