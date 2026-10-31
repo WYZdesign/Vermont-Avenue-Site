@@ -408,6 +408,30 @@ export function getGalleryImages() {
 }
 
 /* -------------------------------------------------------------------------- */
+/* SOCIAL EMBEDS                                                              */
+/* -------------------------------------------------------------------------- */
+
+export type SocialEmbed =
+  | { platform: "instagram"; url: string }
+  | { platform: "tiktok"; url: string; videoId: string }
+  | { platform: "youtube"; videoId: string; title?: string };
+
+/*
+ * Add specific posts here when you want them embedded on the gallery page.
+ * Instagram: paste the post or reel URL, e.g. https://www.instagram.com/p/ABC123/
+ * TikTok: paste the video URL and its numeric id.
+ * YouTube: paste the video id.
+ */
+export const socialEmbeds: SocialEmbed[] = [];
+
+export const socialProfiles = [
+  { label: "Instagram", handle: "@vermontavenuerecords", href: site.instagram },
+  { label: "TikTok", handle: "@vermontavenuerecords", href: site.tiktok },
+  { label: "YouTube", handle: "@VermontAvenueRecords", href: site.youtube },
+  { label: "Facebook", handle: "Vermont Avenue Records", href: site.facebook },
+] as const;
+
+/* -------------------------------------------------------------------------- */
 /* ABOUT                                                                      */
 /* -------------------------------------------------------------------------- */
 

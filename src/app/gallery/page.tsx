@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { PageHero, SectionLabel } from "@/components/SectionLabel";
 import { VideoEmbed } from "@/components/VideoEmbed";
-import { getGalleryImages, getGalleryVideos } from "@/lib/content";
+import { SocialWall } from "@/components/SocialWall";
+import { getGalleryImages, getGalleryVideos, socialEmbeds, socialProfiles } from "@/lib/content";
 
 export const revalidate = 1800;
 
@@ -70,6 +71,28 @@ export default function GalleryPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section-tight">
+        <div className="wrap">
+          <SectionLabel>Social</SectionLabel>
+          <h2 className="h2 mt-5">Follow the label.</h2>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {socialProfiles.map((profile) => (
+              <a
+                key={profile.label}
+                href={profile.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-[var(--line)] bg-bone p-5 transition-colors hover:bg-ink hover:text-white"
+              >
+                <p className="text-[0.58rem] uppercase tracking-[0.18em]">{profile.label}</p>
+                <p className="mt-1 text-sm">{profile.handle}</p>
+              </a>
+            ))}
+          </div>
+          <SocialWall embeds={socialEmbeds} />
         </div>
       </section>
 
