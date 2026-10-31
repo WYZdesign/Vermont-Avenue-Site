@@ -366,7 +366,7 @@ textarea {
 }
 
 .duotone img {
-  filter: grayscale(1) contrast(1.08);
+  filter: saturate(0.7) contrast(1.02);
   transition: transform 0.9s var(--ease);
 }
 
@@ -535,4 +535,17 @@ textarea {
 .hover\:bg-ink:hover a,
 .hover\:bg-forest:hover a {
   color: inherit;
+}
+
+/* Color-preserving tone: keep full color, desaturate roughly 30 percent. */
+.duotone::after {
+  background: var(--color-forest);
+  mix-blend-mode: soft-light;
+  opacity: 0.18;
+}
+
+.duotone::before {
+  background: var(--color-bone);
+  mix-blend-mode: soft-light;
+  opacity: 0.06;
 }

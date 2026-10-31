@@ -3,8 +3,16 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export function VideoEmbed({ id, title }: { id: string; title: string }) {
+export function VideoEmbed({ id, title }: { id?: string; title: string }) {
   const [active, setActive] = useState(false);
+
+  if (!id) {
+    return (
+      <div className="flex aspect-video w-full items-center justify-center border border-[var(--line)] bg-ink">
+        <span className="text-sm text-white/50">Video unavailable</span>
+      </div>
+    );
+  }
 
   if (active) {
     return (

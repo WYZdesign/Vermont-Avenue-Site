@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/services", priority: 0.9 },
     { path: "/releases", priority: 0.8 },
     { path: "/watch", priority: 0.8 },
-    { path: "/live", priority: 0.7 },
+    { path: "/gallery", priority: 0.8 },
     { path: "/book", priority: 0.9 },
     { path: "/contact", priority: 0.6 },
   ];

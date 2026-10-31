@@ -5,7 +5,7 @@ import { PageHero, SectionLabel } from "@/components/SectionLabel";
 import { acts } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Live Bands & DJs",
   description:
     "Book a DJ, soloist, duo, trio, quartet, quintet, DJ plus live combo, or the full Vermont Avenue Allstars for your event in Los Angeles.",
   alternates: { canonical: "/services" },
@@ -30,7 +30,7 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Services"
+        eyebrow="Live Bands & DJs"
         title={
           <>
             Book the

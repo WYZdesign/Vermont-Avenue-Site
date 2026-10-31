@@ -4,10 +4,13 @@ import { ActCard } from "@/components/ActCard";
 import { Marquee } from "@/components/Marquee";
 import { ReleaseItem } from "@/components/ReleaseItem";
 import { SectionLabel } from "@/components/SectionLabel";
-import { about, acts, liveNight, releases, roster, site } from "@/lib/content";
+import { about, acts, releases, roster, site, gallery, getGalleryImages } from "@/lib/content";
 
 const featuredActs = acts.filter((act) => act.featured);
 const featuredReleases = releases.slice(0, 4);
+const featuredGallery = getGalleryImages()
+  .filter((item) => item.category === "cover" || item.category === "flyer")
+  .slice(0, 4);
 const stats = [
   ["5", "Roster artists"],
   ["8", "Live configurations"],
@@ -192,57 +195,48 @@ export default function HomePage() {
         <div className="deco-arc -right-24 top-1/2 h-[22rem] w-[22rem] -translate-y-1/2" aria-hidden="true" />
         <div className="wrap relative grid gap-12 py-20 lg:grid-cols-2 lg:py-28">
           <div>
-            <SectionLabel>05 / Live</SectionLabel>
-            <h2 className="h2 mt-5">{liveNight.title}</h2>
-            <p className="lede mt-5 max-w-lg">{liveNight.copy}</p>
-            <dl className="mt-8 grid gap-5 border-t border-[var(--line-invert)] pt-6 sm:grid-cols-3">
-              <div>
-                <dt className="text-[0.6rem] uppercase tracking-[0.2em] text-[rgba(244,241,232,0.5)]">
-                  Where
-                </dt>
-                <dd className="mt-1 text-sm text-bone">{liveNight.venue}</dd>
-              </div>
-              <div>
-                <dt className="text-[0.6rem] uppercase tracking-[0.2em] text-[rgba(244,241,232,0.5)]">
-                  When
-                </dt>
-                <dd className="mt-1 text-sm text-bone">
-                  {liveNight.day}, {liveNight.time}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[0.6rem] uppercase tracking-[0.2em] text-[rgba(244,241,232,0.5)]">
-                  Bring
-                </dt>
-                <dd className="mt-1 text-sm text-bone">Your instrument, your voice</dd>
-              </div>
-            </dl>
+            <SectionLabel>05 / Gallery</SectionLabel>
+            <h2 className="h2 mt-5">The archive.</h2>
+            <p className="lede mt-5 max-w-lg">Rehearsals, shoots, events, cover art, and videos from the Vermont Avenue collective.</p>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {featuredGallery.map((item) => (
+                <div key={item.id} className="group relative aspect-square overflow-hidden border border-[var(--line)] bg-bone">
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                    className="w-full h-full object-cover opacity-85 transition-opacity group-hover:opacity-100"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <div>
+                      <p className="text-sm font-semibold text-white">{item.title}</p>
+                      <p className="text-[0.62rem] uppercase tracking-[0.14em] text-white/70">{item.category}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/live" className="btn">
-                Live details
+              <Link href="/gallery" className="btn">
+                View full gallery
               </Link>
-              <a
-                href={liveNight.mapUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-ghost"
-              >
-                Map
-              </a>
+              <Link href="/watch" className="btn btn-ghost">
+                Watch videos
+              </Link>
             </div>
           </div>
           <div className="relative">
             <div className="duotone relative aspect-[4/3] w-full border border-[var(--line-invert)]">
               <Image
                 src="/images/artist-ryan.jpg"
-                alt="Vermont Avenue Records live"
+                alt="Vermont Avenue Records gallery"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
             <p className="serif mt-4 text-xl text-[var(--color-sage)]">
-              Open mic, every Thursday, The Stowaway.
+              Rehearsals, shoots, events, cover art, and videos.
             </p>
           </div>
         </div>

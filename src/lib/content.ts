@@ -18,10 +18,10 @@ export const site = {
 export const nav = [
   { label: "Label", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
+  { label: "Live Bands/DJs", href: "/services" },
   { label: "Releases", href: "/releases" },
   { label: "Watch", href: "/watch" },
-  { label: "Live", href: "/live" },
+  { label: "Gallery", href: "/gallery" },
 ] as const;
 
 /* -------------------------------------------------------------------------- */
@@ -315,15 +315,6 @@ export const releases: Release[] = [
     embedType: "album",
   },
   {
-    artist: "Ryan Washington",
-    title: "Turn Your Heart to Mine",
-    year: "2025",
-    cover: "/images/ryan-turn-your-heart.jpg",
-    url: "https://ryanwashington.bandcamp.com/track/turn-your-heart-to-mine",
-    embed: "https://bandcamp.com/EmbeddedPlayer/track=1866020265/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
-    embedType: "track",
-  },
-  {
     artist: "Ryan Washington x Sophia Morrow",
     title: "What Used to Be",
     year: "2026",
@@ -333,12 +324,12 @@ export const releases: Release[] = [
     embedType: "track",
   },
   {
-    artist: "Sophia Morrow x Ryan Washington",
-    title: "What Used to Be",
-    year: "2026",
-    cover: "/images/sophia-used-to-be.jpg",
-    url: "https://sophiamorrow.bandcamp.com/track/what-used-to-be",
-    embed: "https://bandcamp.com/EmbeddedPlayer/track=3769876458/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
+    artist: "Ryan Washington",
+    title: "Turn Your Heart to Mine",
+    year: "2025",
+    cover: "/images/ryan-turn-your-heart.jpg",
+    url: "https://ryanwashington.bandcamp.com/track/turn-your-heart-to-mine",
+    embed: "https://bandcamp.com/EmbeddedPlayer/track=1866020265/size=large/bgcol=f4f1e8/linkcol=1f3d2b/transparent=true/",
     embedType: "track",
   },
   {
@@ -362,20 +353,59 @@ export const releases: Release[] = [
 ];
 
 /* -------------------------------------------------------------------------- */
-/* LIVE                                                                       */
+/* GALLERY / CONTENT                                                          */
 /* -------------------------------------------------------------------------- */
 
-export const liveNight = {
-  title: "Thursdays on the block",
-  venue: "The Stowaway",
-  address: "416 S Spring St, Los Angeles, CA 90013",
-  day: "Every Thursday",
-  time: "Doors 8PM",
-  copy:
-    "An open mic and jam night in Downtown LA. Musicians and singers are encouraged to play. Hosted by the house band, The LA Limes.",
-  mapUrl:
-    "https://www.google.com/maps/search/?api=1&query=The+Stowaway%2C+416+S+Spring+St%2C+Los+Angeles%2C+CA+90013",
+export type GalleryItem = {
+  id: string;
+  type: "image" | "video";
+  src: string;
+  alt: string;
+  category: "rehearsal" | "shoot" | "event" | "social" | "cover" | "flyer" | "logo" | "merch";
+  title?: string;
+  description?: string;
+  videoId?: string; // for YouTube embeds
 };
+
+export const gallery: GalleryItem[] = [
+  // Brand logos from the shared Graphics folder
+  { id: "logo-1", type: "image", src: "/images/gallery/logo-1.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
+  { id: "logo-2", type: "image", src: "/images/gallery/logo-2.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
+  { id: "logo-3", type: "image", src: "/images/gallery/logo-3.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
+  { id: "logo-4", type: "image", src: "/images/gallery/logo-4.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
+  { id: "logo-5", type: "image", src: "/images/gallery/logo-5.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
+  { id: "logo-6", type: "image", src: "/images/gallery/logo-6.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
+  { id: "logo-7", type: "image", src: "/images/gallery/logo-7.jpg", alt: "Vermont Avenue Records logo", category: "logo", title: "Logo" },
+  // Flyer from the shared Graphics folder
+  { id: "flyer-1", type: "image", src: "/images/gallery/flyer-1.jpg", alt: "Vermont Avenue Records flyer", category: "flyer", title: "Flyer" },
+  // Cover art
+  { id: "cover-1", type: "image", src: "/images/freshly-squeezed.jpg", alt: "Freshly Squeezed cover", category: "cover", title: "Freshly Squeezed" },
+  { id: "cover-2", type: "image", src: "/images/descent.jpg", alt: "Descent cover", category: "cover", title: "Descent" },
+  { id: "cover-3", type: "image", src: "/images/grid-failure.jpg", alt: "Grid Failure cover", category: "cover", title: "Grid Failure" },
+  { id: "cover-4", type: "image", src: "/images/deal-with-the-devil.jpg", alt: "Deal With the Devil cover", category: "cover", title: "Deal With the Devil" },
+  { id: "cover-5", type: "image", src: "/images/therapy.jpg", alt: "Therapy cover", category: "cover", title: "Therapy" },
+  { id: "cover-6", type: "image", src: "/images/ryan-turn-your-heart.jpg", alt: "Turn Your Heart to Mine cover", category: "cover", title: "Turn Your Heart to Mine" },
+  { id: "cover-7", type: "image", src: "/images/sophia-what-you-mean-to-me.jpg", alt: "What You Mean To Me cover", category: "cover", title: "What You Mean To Me" },
+  // Video embeds from YouTube
+  { id: "vid-1", type: "video", src: "", alt: "River Styx", category: "event", title: "River Styx", videoId: "ztB1xYO1cAg" },
+  { id: "vid-2", type: "video", src: "", alt: "These Demons That Surround Me", category: "event", title: "These Demons That Surround Me", videoId: "elMs8AGLZ-g" },
+  { id: "vid-3", type: "video", src: "", alt: "Kick Rocks", category: "event", title: "Kick Rocks", videoId: "bTuGe3DLwFg" },
+  { id: "vid-4", type: "video", src: "", alt: "Anticipation", category: "event", title: "Anticipation", videoId: "bGtEkYwj5mE" },
+  { id: "vid-5", type: "video", src: "", alt: "Level 5", category: "event", title: "Level 5", videoId: "7OXy68ILTZc" },
+  { id: "vid-6", type: "video", src: "", alt: "Descent", category: "event", title: "Descent", videoId: "nE1ek3ONFNY" },
+];
+
+export function getGalleryByCategory(category: GalleryItem["category"]) {
+  return gallery.filter((item) => item.category === category);
+}
+
+export function getGalleryVideos() {
+  return gallery.filter((item) => item.type === "video");
+}
+
+export function getGalleryImages() {
+  return gallery.filter((item) => item.type === "image");
+}
 
 /* -------------------------------------------------------------------------- */
 /* ABOUT                                                                      */

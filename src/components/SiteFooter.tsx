@@ -9,7 +9,7 @@ const columns = [
     links: [
       { label: "About", href: "/about" },
       { label: "Releases", href: "/releases" },
-      { label: "Live", href: "/live" },
+      { label: "Live Bands/DJs", href: "/services" },
     ],
   },
   {
@@ -25,6 +25,7 @@ const columns = [
     title: "Listen",
     links: [
       { label: "Watch", href: "/watch" },
+      { label: "Gallery", href: "/gallery" },
       { label: "Bandcamp", href: site.bandcamp },
       { label: "Spotify", href: site.spotify },
       { label: "YouTube", href: site.youtube },
