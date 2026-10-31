@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { query } from "@/lib/db";
 import type { Invoice } from "@/lib/types";
-import { createInvoiceAction } from "../actions";
+import { updateInvoiceStatusAction } from "../actions";
+import { InvoiceBuilder } from "@/components/admin/InvoiceBuilder";
 import { StripeLinkButton } from "./StripeLinkButton";
 
 export const dynamic = "force-dynamic";
@@ -10,94 +12,68 @@ function money(cents: number): string {
 }
 
 export default async function AdminInvoicesPage() {
-  const rows = await query<Invoice>(
-    "select * from invoices order by created_at desc limit 200"
-  );
+  const rows = await query<Invoice>("select * from invoices order by created_at desc limit 200");
+  const open = rows.filter((row) => row.status !== "paid" && row.status !== "void");
+  const outstanding = open.reduce((sum, row) => sum + row.amount_cents, 0);
 
   return (
     <div className="space-y-6">
-      <div>
-        <span className="eyebrow">Invoices</span>
-        <h1 className="h2 mt-3">The money.</h1>
-        <p className="mt-2 text-sm muted">
-          Create invoices and attach a Stripe payment link when the account is live.
-        </p>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <span className="eyebrow">Invoices</span>
+          <h1 className="h2 mt-3">The money.</h1>
+          <p className="mt-2 text-sm muted">
+            Build line-item invoices, track deposits, and attach a Stripe payment link.
+          </p>
+        </div>
+        <div className="border border-[var(--line)] bg-bone px-5 py-3">
+          <p className="text-[0.58rem] uppercase tracking-[0.16em] text-fog">Outstanding</p>
+          <p className="mt-1 text-xl font-medium">{money(outstanding)}</p>
+        </div>
       </div>
 
-      <form
-        action={createInvoiceAction}
-        className="grid gap-3 border border-[var(--line)] bg-bone p-5 sm:grid-cols-2"
-      >
-        <div>
-          <label className="label" htmlFor="number">Invoice number</label>
-          <input className="field" id="number" name="number" placeholder="Auto" />
-        </div>
-        <div>
-          <label className="label" htmlFor="amount">Amount (USD)</label>
-          <input className="field" id="amount" name="amount" inputMode="decimal" placeholder="0.00" />
-        </div>
-        <div>
-          <label className="label" htmlFor="status">Status</label>
-          <select className="field" id="status" name="status" defaultValue="draft">
-            <option value="draft">draft</option>
-            <option value="sent">sent</option>
-            <option value="paid">paid</option>
-            <option value="void">void</option>
-          </select>
-        </div>
-        <div>
-          <label className="label" htmlFor="due_date">Due date</label>
-          <input className="field" id="due_date" name="due_date" type="date" />
-        </div>
-        <div className="sm:col-span-2">
-          <label className="label" htmlFor="stripe_payment_link">Stripe payment link</label>
-          <input className="field" id="stripe_payment_link" name="stripe_payment_link" placeholder="https://buy.stripe.com/..." />
-        </div>
-        <div className="sm:col-span-2">
-          <label className="label" htmlFor="notes">Notes</label>
-          <textarea className="field" id="notes" name="notes" rows={2} />
-        </div>
-        <div className="sm:col-span-2">
-          <button type="submit" className="btn">Create invoice</button>
-        </div>
-      </form>
+      <InvoiceBuilder />
 
       <div className="overflow-x-auto border border-[var(--line)] bg-bone">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-[var(--line)] text-[0.6rem] uppercase tracking-[0.16em] text-fog">
             <tr>
               <th className="p-3">Number</th>
-              <th className="p-3">Amount</th>
+              <th className="p-3">Client</th>
+              <th className="p-3">Total</th>
               <th className="p-3">Status</th>
               <th className="p-3">Due</th>
-              <th className="p-3">Stripe link</th>
-              <th className="p-3">Created</th>
+              <th className="p-3">Actions</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((row) => (
               <tr key={row.id} className="border-b border-[var(--line-soft)] last:border-0">
-                <td className="p-3 font-medium">{row.number}</td>
+                <td className="p-3 font-medium">
+                  <Link href={"/admin/invoices/" + row.id} className="underline">
+                    {row.number}
+                  </Link>
+                </td>
+                <td className="p-3 text-xs">{row.client_name || "-"}</td>
                 <td className="p-3">{money(row.amount_cents)}</td>
                 <td className="p-3 text-xs uppercase tracking-[0.12em]">{row.status}</td>
-                <td className="p-3 text-xs">{row.due_date || "—"}</td>
-                <td className="p-3 text-xs">
-                  <div className="flex flex-col gap-1">
-                    {row.stripe_payment_link && (
-                      <a
-                        href={row.stripe_payment_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline"
-                      >
-                        Open
-                      </a>
-                    )}
+                <td className="p-3 text-xs">{row.due_date || "-"}</td>
+                <td className="p-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <form action={updateInvoiceStatusAction} className="flex items-center gap-1">
+                      <input type="hidden" name="id" value={row.id} />
+                      <select name="status" defaultValue={row.status} className="field !min-h-8 !py-1 text-xs">
+                        <option value="draft">draft</option>
+                        <option value="sent">sent</option>
+                        <option value="paid">paid</option>
+                        <option value="void">void</option>
+                      </select>
+                      <button type="submit" className="border border-[var(--line)] px-2 py-1 text-[0.58rem] uppercase tracking-[0.14em]">
+                        Set
+                      </button>
+                    </form>
                     <StripeLinkButton id={row.id} />
                   </div>
-                </td>
-                <td className="p-3 whitespace-nowrap text-xs muted">
-                  {new Date(row.created_at).toLocaleDateString()}
                 </td>
               </tr>
             ))}

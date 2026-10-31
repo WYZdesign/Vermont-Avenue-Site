@@ -1,16 +1,18 @@
 import { query } from "@/lib/db";
 import type { Contract } from "@/lib/types";
-import { createContractAction } from "../actions";
+import { updateContractStatusAction, saveContractBodyAction } from "../actions";
+import { ContractBuilder, type BookingOption } from "@/components/admin/ContractBuilder";
 
 export const dynamic = "force-dynamic";
 
-const template =
-  "Agreement between Vermont Avenue Records and the Client for the performance described in the booking. " +
-  "A 50% deposit secures the date. The balance is due before the event. " +
-  "The Client provides a safe performance area, power, and a load-in window. " +
-  "Cancellation terms: the deposit is non-refundable within 14 days of the event.";
-
 export default async function AdminContractsPage() {
+  const bookings = await query<BookingOption>(
+    `select id, name, event_date, event_type, act, venue
+       from bookings
+      order by created_at desc
+      limit 50`
+  );
+
   const rows = await query<Contract>(
     "select * from contracts order by created_at desc limit 200"
   );
@@ -21,48 +23,56 @@ export default async function AdminContractsPage() {
         <span className="eyebrow">Contracts</span>
         <h1 className="h2 mt-3">The paper.</h1>
         <p className="mt-2 text-sm muted">
-          Draft agreements now; wire e-sign when the provider is set up.
+          Generate a full performance agreement from a booking, preview it with AI, then
+          send it for signature.
         </p>
       </div>
 
-      <form
-        action={createContractAction}
-        className="grid gap-3 border border-[var(--line)] bg-bone p-5"
-      >
-        <div>
-          <label className="label" htmlFor="title">Title</label>
-          <input className="field" id="title" name="title" defaultValue="Performance agreement" />
-        </div>
-        <div>
-          <label className="label" htmlFor="body">Body</label>
-          <textarea className="field" id="body" name="body" rows={6} defaultValue={template} />
-        </div>
-        <div>
-          <label className="label" htmlFor="status">Status</label>
-          <select className="field max-w-xs" id="status" name="status" defaultValue="draft">
-            <option value="draft">draft</option>
-            <option value="sent">sent</option>
-            <option value="signed">signed</option>
-            <option value="void">void</option>
-          </select>
-        </div>
-        <div>
-          <button type="submit" className="btn">Create contract</button>
-        </div>
-      </form>
+      <ContractBuilder bookings={bookings} />
 
       <div className="space-y-3">
         {rows.map((row) => (
           <details key={row.id} className="border border-[var(--line)] bg-bone p-4">
-            <summary className="cursor-pointer text-sm font-medium">
-              {row.title}
-              <span className="ml-3 text-[0.6rem] uppercase tracking-[0.14em] text-fog">
-                {row.status}
+            <summary className="flex cursor-pointer flex-wrap items-center gap-3 text-sm font-medium">
+              <span>{row.title}</span>
+              <span className="text-[0.6rem] uppercase tracking-[0.14em] text-fog">
+                {row.contract_type} | {row.status}
               </span>
+              {row.fee_cents > 0 && (
+                <span className="text-[0.6rem] uppercase tracking-[0.14em] text-fog">
+                  ${(row.fee_cents / 100).toLocaleString()}
+                </span>
+              )}
             </summary>
-            <p className="mt-3 whitespace-pre-wrap text-sm text-[rgba(11,11,11,0.7)]">
-              {row.body}
-            </p>
+
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <form action={updateContractStatusAction} className="flex items-center gap-2">
+                <input type="hidden" name="id" value={row.id} />
+                <select name="status" defaultValue={row.status} className="field max-w-[10rem]">
+                  <option value="draft">draft</option>
+                  <option value="sent">sent</option>
+                  <option value="signed">signed</option>
+                  <option value="void">void</option>
+                </select>
+                <button type="submit" className="btn btn-ghost">Update</button>
+              </form>
+              {row.signed_at && (
+                <span className="text-[0.62rem] text-fog">
+                  Signed {new Date(row.signed_at).toLocaleDateString()}
+                </span>
+              )}
+            </div>
+
+            <form action={saveContractBodyAction} className="mt-4 grid gap-2">
+              <input type="hidden" name="id" value={row.id} />
+              <textarea
+                name="body"
+                defaultValue={row.body}
+                rows={18}
+                className="field font-mono text-xs leading-relaxed"
+              />
+              <button type="submit" className="btn w-fit">Save changes</button>
+            </form>
           </details>
         ))}
         {rows.length === 0 && (

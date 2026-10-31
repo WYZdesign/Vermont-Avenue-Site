@@ -3,6 +3,7 @@ import { Bodoni_Moda, Instrument_Serif, Jost } from "next/font/google";
 import "./globals.css";
 import { Chrome } from "@/components/Chrome";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { MetaPixel } from "@/components/MetaPixel";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { site } from "@/lib/content";
@@ -109,6 +110,7 @@ export default function RootLayout({
           {children}
         </Chrome>
         <GoogleAnalytics />
+        <MetaPixel />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
