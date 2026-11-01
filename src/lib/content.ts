@@ -383,13 +383,82 @@ export const gallery: GalleryItem[] = [
   { id: "cover-5", type: "image", src: "/images/therapy.jpg", alt: "Therapy cover", category: "cover", title: "Therapy" },
   { id: "cover-6", type: "image", src: "/images/ryan-turn-your-heart.jpg", alt: "Turn Your Heart to Mine cover", category: "cover", title: "Turn Your Heart to Mine" },
   { id: "cover-7", type: "image", src: "/images/sophia-what-you-mean-to-me.jpg", alt: "What You Mean To Me cover", category: "cover", title: "What You Mean To Me" },
-  // Video embeds from YouTube
-  { id: "vid-1", type: "video", src: "", alt: "River Styx", category: "event", title: "River Styx", videoId: "ztB1xYO1cAg" },
-  { id: "vid-2", type: "video", src: "", alt: "These Demons That Surround Me", category: "event", title: "These Demons That Surround Me", videoId: "elMs8AGLZ-g" },
-  { id: "vid-3", type: "video", src: "", alt: "Kick Rocks", category: "event", title: "Kick Rocks", videoId: "bTuGe3DLwFg" },
-  { id: "vid-4", type: "video", src: "", alt: "Anticipation", category: "event", title: "Anticipation", videoId: "bGtEkYwj5mE" },
-  { id: "vid-5", type: "video", src: "", alt: "Level 5", category: "event", title: "Level 5", videoId: "7OXy68ILTZc" },
-  { id: "vid-6", type: "video", src: "", alt: "Descent", category: "event", title: "Descent", videoId: "nE1ek3ONFNY" },
+  // Additional covers from Takeout
+  { id: "cover-8", type: "image", src: "/images/gallery/takeout/LimesCover.jpg", alt: "The LA Limes cover", category: "cover", title: "The LA Limes" },
+  { id: "cover-9", type: "image", src: "/images/gallery/takeout/What You Mean to Me.jpg", alt: "What You Mean To Me cover (alt)", category: "cover", title: "What You Mean To Me" },
+  // Shared Drive - Logos & Graphics (from G:\Shared drives\Vermont Ave\Graphics)
+  { id: "sd-logo-1", type: "image", src: "/images/gallery/shared-drive/BD82F921-0B1A-4C4C-930F-47066ED29A19.PNG", alt: "Vermont Avenue Records logo variant", category: "brand", title: "Logo variant" },
+  { id: "sd-logo-2", type: "image", src: "/images/gallery/shared-drive/23D4D93D-A3A2-4B13-9827-2CA0B06D6079.PNG", alt: "Vermont Avenue Records logo variant", category: "brand", title: "Logo variant" },
+  { id: "sd-logo-3", type: "image", src: "/images/gallery/shared-drive/004BF07F-36DE-4BFA-A0BD-B808D99E80B8.PNG", alt: "Vermont Avenue Records logo variant", category: "brand", title: "Logo variant" },
+  { id: "sd-logo-4", type: "image", src: "/images/gallery/shared-drive/152E7178-3814-496D-B411-9020E182F452.PNG", alt: "Vermont Avenue Records logo variant", category: "brand", title: "Logo variant" },
+  { id: "sd-logo-5", type: "image", src: "/images/gallery/shared-drive/ChatGPT Image Aug 4, 2026, 11_12_10 PM.png", alt: "Vermont Avenue Records AI concept logo", category: "brand", title: "AI concept logo" },
+  { id: "sd-logo-6", type: "image", src: "/images/gallery/shared-drive/ChatGPT Image Aug 4, 2026, 11_19_51 PM.png", alt: "Vermont Avenue Records AI concept logo", category: "brand", title: "AI concept logo" },
+  { id: "sd-logo-7", type: "image", src: "/images/gallery/shared-drive/IMG_9595 2.PNG", alt: "Vermont Avenue Records street sign photo", category: "brand", title: "Street sign photo" },
+  { id: "sd-flyer-1", type: "image", src: "/images/gallery/shared-drive/Untitled-1.JPEG", alt: "Vermont Avenue Records flyer", category: "flyer", title: "Promotional flyer" },
+  // Takeout - Artist photos & shoots
+  { id: "shoot-1", type: "image", src: "/images/gallery/takeout/Ryan Washington (1).jpg", alt: "Ryan Washington portrait", category: "shoot", title: "Ryan Washington" },
+  { id: "shoot-2", type: "image", src: "/images/gallery/takeout/artist-dantes.jpg", alt: "The Dante's Inferno band photo", category: "shoot", title: "The Dante's Inferno" },
+  { id: "shoot-3", type: "image", src: "/images/gallery/takeout/IMG_3321.jpeg", alt: "Band rehearsal candid", category: "shoot", title: "Rehearsal candid" },
+  { id: "shoot-4", type: "image", src: "/images/gallery/takeout/IMG_3324.jpeg", alt: "Live performance shot", category: "event", title: "Live performance" },
+  // Takeout - AI concept logos & branding
+  { id: "brand-ai-1", type: "image", src: "/images/gallery/takeout/image_ac7ebb.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-2", type: "image", src: "/images/gallery/takeout/image_ac6456.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-3", type: "image", src: "/images/gallery/takeout/image_ac6bef.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-4", type: "image", src: "/images/gallery/takeout/image_ac6bef (1).png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-5", type: "image", src: "/images/gallery/takeout/image_ace46e.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-6", type: "image", src: "/images/gallery/takeout/image_ace7b0.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-7", type: "image", src: "/images/gallery/takeout/image_acf313.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-8", type: "image", src: "/images/gallery/takeout/image_9edf92.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-9", type: "image", src: "/images/gallery/takeout/image_b8aa1c.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-10", type: "image", src: "/images/gallery/takeout/image_b8c442.jpg", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-11", type: "image", src: "/images/gallery/takeout/image_b6e7a1.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-12", type: "image", src: "/images/gallery/takeout/image_b763dc.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-13", type: "image", src: "/images/gallery/takeout/image_b763dc (1).png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-14", type: "image", src: "/images/gallery/takeout/image_b8a9df.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-15", type: "image", src: "/images/gallery/takeout/image_b8a9bd.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  { id: "brand-ai-16", type: "image", src: "/images/gallery/takeout/image_b8419c.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
+  // Drive zip video frames - IMG_6337.MOV (rehearsal content)
+  { id: "vidframe-1", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_001.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
+  { id: "vidframe-2", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_002.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
+  { id: "vidframe-3", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_003.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
+  { id: "vidframe-4", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_004.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
+  { id: "vidframe-5", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_005.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
+  { id: "vidframe-6", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_006.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
+  { id: "vidframe-7", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_007.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
+  { id: "vidframe-8", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_008.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
+  // Drive zip video frames - P1058860.MP4 (event content)
+  { id: "vidframe-9", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_001.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-10", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_002.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-11", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_003.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-12", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_004.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-13", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_005.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-14", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_006.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-15", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_007.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-16", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_008.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-17", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_009.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-18", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_010.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-19", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_011.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-20", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_012.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-21", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_013.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  { id: "vidframe-22", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_014.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
+  // Shared drive video frames - MVI_3325.MP4 (event)
+  { id: "vidframe-23", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi3325_001.jpg", alt: "Event footage frame", category: "event", title: "Event footage" },
+  { id: "vidframe-24", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi3325_002.jpg", alt: "Event footage frame", category: "event", title: "Event footage" },
+  { id: "vidframe-25", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi3325_003.jpg", alt: "Event footage frame", category: "event", title: "Event footage" },
+  { id: "vidframe-26", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi3325_004.jpg", alt: "Event footage frame", category: "event", title: "Event footage" },
+  { id: "vidframe-27", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi3325_005.jpg", alt: "Event footage frame", category: "event", title: "Event footage" },
+  // Shared drive video frames - MVI_5240.MP4 (podcast)
+  { id: "vidframe-28", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi5240_001.jpg", alt: "Podcast recording frame", category: "social", title: "Podcast recording" },
+  { id: "vidframe-29", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi5240_002.jpg", alt: "Podcast recording frame", category: "social", title: "Podcast recording" },
+  // Additional video frames from more shared drive videos
+  { id: "vidframe-30", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi3277_001.jpg", alt: "Event footage frame", category: "event", title: "Event footage" },
+  { id: "vidframe-31", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi3284_001.jpg", alt: "Event footage frame", category: "event", title: "Event footage" },
+  { id: "vidframe-32", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi3284_002.jpg", alt: "Event footage frame", category: "event", title: "Event footage" },
+  { id: "vidframe-33", type: "image", src: "/images/gallery/shared-drive/video-frames/rehearsal_benji1_001.jpg", alt: "Benji rehearsal angle", category: "rehearsal", title: "Benji rehearsal" },
+  { id: "vidframe-34", type: "image", src: "/images/gallery/shared-drive/video-frames/rehearsal_benji1_002.jpg", alt: "Benji rehearsal angle", category: "rehearsal", title: "Benji rehearsal" },
+  // Rehearsal extended clips frames (Benji Angle)
+  { id: "rehearsal-1", type: "image", src: "/images/gallery/shared-drive/video-frames/rehearsal_benji1_001.jpg", alt: "Benji drum rehearsal", category: "rehearsal", title: "Drum rehearsal" },
+  { id: "rehearsal-2", type: "image", src: "/images/gallery/shared-drive/video-frames/rehearsal_benji1_002.jpg", alt: "Benji drum rehearsal", category: "rehearsal", title: "Drum rehearsal" },
 ];
 
 export function getGalleryByCategory(category: GalleryItem["category"]) {
@@ -397,7 +466,8 @@ export function getGalleryByCategory(category: GalleryItem["category"]) {
 }
 
 export function getGalleryVideos() {
-  return gallery.filter((item) => item.type === "video");
+  // Videos now served via YouTube playlist embed on the gallery page
+  return [];
 }
 
 export function getGalleryImages() {

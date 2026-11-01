@@ -61,10 +61,10 @@ export default function HomePage() {
           </div>
 
           <div className="relative">
-            <div className="duotone relative aspect-[4/5] w-full border border-[var(--line-invert)]">
+            <div className="duotone relative aspect-square w-full border border-[var(--line-invert)]">
               <Image
-                src="/images/artist-lalimes.jpg"
-                alt="Freshly Squeezed album art"
+                src="/images/vermont-logo.jpg"
+                alt="Vermont Avenue Records street sign logo"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 45vw"
@@ -73,9 +73,9 @@ export default function HomePage() {
             </div>
             <div className="absolute -bottom-5 left-4 right-4 flex items-center justify-between gap-4 border border-[var(--line-invert)] bg-[rgba(11,11,11,0.92)] px-4 py-3 backdrop-blur">
               <span className="text-[0.58rem] uppercase tracking-[0.22em] text-[rgba(244,241,232,0.55)]">
-                Out now
+                Vermont Avenue Records
               </span>
-              <span className="text-sm text-bone">Freshly Squeezed</span>
+              <span className="text-sm text-bone">Independent label, Los Angeles</span>
             </div>
           </div>
         </div>

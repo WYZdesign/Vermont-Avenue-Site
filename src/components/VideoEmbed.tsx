@@ -3,7 +3,11 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export function VideoEmbed({ id, title }: { id?: string; title: string }) {
+export function VideoEmbed({
+  id,
+  title,
+  isPlaylist = false,
+}: { id?: string; title: string; isPlaylist?: boolean }) {
   const [active, setActive] = useState(false);
 
   if (!id) {
@@ -14,12 +18,16 @@ export function VideoEmbed({ id, title }: { id?: string; title: string }) {
     );
   }
 
+  const embedSrc = isPlaylist
+    ? `https://www.youtube-nocookie.com/embed/videoseries?list=${id}&autoplay=1&rel=0&modestbranding=1`
+    : `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+
   if (active) {
     return (
       <div className="relative aspect-video w-full overflow-hidden border border-[var(--line)] bg-ink">
         <iframe
           className="absolute inset-0 h-full w-full"
-          src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`}
+          src={embedSrc}
           title={title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
@@ -27,6 +35,12 @@ export function VideoEmbed({ id, title }: { id?: string; title: string }) {
       </div>
     );
   }
+
+  // For playlist, use first video thumbnail as placeholder
+  const thumbId = isPlaylist ? "playlist" : id;
+  const thumbSrc = isPlaylist
+    ? "https://i.ytimg.com/vi/ztB1xYO1cAg/hqdefault.jpg" // first video from channel
+    : `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 
   return (
     <button
@@ -36,7 +50,7 @@ export function VideoEmbed({ id, title }: { id?: string; title: string }) {
       aria-label={`Play ${title}`}
     >
       <Image
-        src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+        src={thumbSrc}
         alt=""
         fill
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -49,6 +63,11 @@ export function VideoEmbed({ id, title }: { id?: string; title: string }) {
           </svg>
         </span>
       </span>
+      {isPlaylist && (
+        <span className="absolute bottom-3 right-3 text-[0.58rem] uppercase tracking-[0.12em] bg-[rgba(11,11,11,0.8)] text-white px-2 py-1 rounded">
+          Playlist
+        </span>
+      )}
     </button>
   );
 }
