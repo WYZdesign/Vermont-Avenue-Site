@@ -37,14 +37,54 @@ function fallback(kind: string, context: Record<string, unknown>): string {
   if (kind === "invoice") {
     const items = Array.isArray(context.items) ? (context.items as Array<Record<string, unknown>>) : [];
     const lines = items
-      .map((item) => `- ${item.description}: ${item.quantity} x $${(Number(item.unit_cents) / 100).toFixed(2)}`)
+      .map((item) => {
+        const qty = Number(item.quantity) || 1;
+        const unit = Number(item.unit_cents) || 0;
+        const total = qty * unit;
+        return `${item.description || "Item"}\t${qty}\t$${(unit / 100).toFixed(2)}\t$${(total / 100).toFixed(2)}`;
+      })
       .join("\n");
-    return `Invoice summary\n\nClient: ${context.clientName || "Client"}\nService date: ${context.serviceDate || "TBD"}\nDue: ${context.dueDate || "TBD"}\n\n${lines || "- [add line items]"}\n\nThank you for booking Vermont Avenue Records.`;
+    const subtotalCents = items.reduce((sum, item) => sum + (Number(item.quantity) || 1) * (Number(item.unit_cents) || 0), 0);
+    const taxCents = Number(context.tax_cents) || 0;
+    const depositCents = Number(context.deposit_cents) || 0;
+    const totalCents = subtotalCents + taxCents;
+    const balanceCents = Math.max(totalCents - depositCents, 0);
+    return `VERMONT AVENUE RECORDS — INVOICE
+
+Invoice #: ${context.invoiceNumber || "[auto]"}
+Date: ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+Due: ${context.dueDate || "On receipt"}
+
+Bill To:
+${context.clientName || "Client"}
+${context.clientEmail ? context.clientEmail + "\n" : ""}${context.clientPhone ? context.clientPhone + "\n" : ""}
+
+Service Date: ${context.serviceDate || "TBD"}
+Venue/Event: ${context.venue || context.eventName || "TBD"}
+
+ITEMS
+Description\tQty\tUnit\tTotal
+${lines || "- [add line items]\t1\t$0.00\t$0.00"}
+
+Subtotal: $${(subtotalCents / 100).toFixed(2)}
+Tax: $${(taxCents / 100).toFixed(2)}
+Total: $${(totalCents / 100).toFixed(2)}
+Deposit Paid: $${(depositCents / 100).toFixed(2)}
+Balance Due: $${(balanceCents / 100).toFixed(2)}
+
+Payment: cash, Zelle, Cash App, Venmo, PayPal, or card. Net 0 — due on receipt.
+Make payments to: Vermont Avenue Records
+
+Thank you for booking Vermont Avenue Records.`;
   }
 
   const topic = String(context.topic || "");
-  const platform = String(context.platform || "social");
-  return `${topic || "New from Vermont Avenue Records."}\n\nLive dates, releases, and studio footage. ${platform === "instagram" ? "Link in bio." : "Listen and follow."}`;
+  const platform = String(context.platform || "instagram");
+  const handle = platform === "instagram" ? "@vermontavenuerecords" : platform === "tiktok" ? "@vermontavenuerecords" : "Vermont Avenue Records";
+  const base = topic || "New from Vermont Avenue Records — live dates, releases, and studio footage.";
+  const cta = platform === "instagram" ? "Link in bio for tickets and merch." : platform === "tiktok" ? "Follow for more." : "Listen and follow.";
+  const tags = platform === "instagram" ? "\n#VermontAvenueRecords #LAEvents #LiveMusic #IndependentLabel" : platform === "tiktok" ? "\n#VermontAvenueRecords #LAEvents #LiveMusic" : "";
+  return `${base}\n\n${cta}${tags}`;
 }
 
 export async function POST(request: Request) {
