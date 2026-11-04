@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCurrentUser, isAdmin } from "@/lib/auth";
 import { buildPerformanceContract } from "@/lib/contracts";
+import Anthropic from "@anthropic-ai/sdk";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -99,6 +100,25 @@ export async function POST(request: Request) {
     if (!text) throw new Error("empty");
     return NextResponse.json({ ok: true, source: "ai", text });
   } catch {
+    const anthropicKey = process.env.ANTHROPIC_API_KEY;
+    if (anthropicKey) {
+      try {
+        const anthropic = new Anthropic({ apiKey: anthropicKey });
+        const msg = await anthropic.messages.create({
+          model: "claude-3-5-sonnet-20241022",
+          max_tokens: 1500,
+          temperature: 0.4,
+          system: VOICE,
+          messages: [{ role: "user", content: prompt }],
+        });
+        const text = msg.content[0].type === "text" ? msg.content[0].text.trim() : "";
+        if (text) {
+          return NextResponse.json({ ok: true, source: "anthropic", text });
+        }
+      } catch {
+        // fall through to template
+      }
+    }
     return NextResponse.json({ ok: true, source: "template", text: templateText });
   }
 }
