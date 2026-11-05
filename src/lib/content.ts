@@ -137,7 +137,7 @@ export const acts: Act[] = [
       "Arrangements for your event",
     ],
     bestFor: ["Cocktail hours", "Jazz nights", "Weddings", "Corporate dinners"],
-    image: "/images/freshly-squeezed.jpg",
+    image: "/images/gallery/shared-drive/video-frames/mvi3325_001.jpg",
     priceFrom: null,
   },
   {
@@ -155,7 +155,7 @@ export const acts: Act[] = [
       "Repertoire planning",
     ],
     bestFor: ["Receptions", "Galas", "Corporate events", "Anniversaries"],
-    image: "/images/descent.jpg",
+    image: "/images/gallery/shared-drive/video-frames/p1058860_001.jpg",
     priceFrom: null,
   },
   {
@@ -173,7 +173,7 @@ export const acts: Act[] = [
       "Set planning with the band",
     ],
     bestFor: ["Weddings", "Galas", "Fundraisers", "Holiday parties"],
-    image: "/images/grid-failure.jpg",
+    image: "/images/gallery/shared-drive/video-frames/mvi3277_001.jpg",
     priceFrom: null,
   },
   {
@@ -385,7 +385,6 @@ export const gallery: GalleryItem[] = [
   { id: "cover-7", type: "image", src: "/images/sophia-what-you-mean-to-me.jpg", alt: "What You Mean To Me cover", category: "cover", title: "What You Mean To Me" },
   // Additional covers from Takeout
   { id: "cover-8", type: "image", src: "/images/gallery/takeout/LimesCover.jpg", alt: "The LA Limes cover", category: "cover", title: "The LA Limes" },
-  { id: "cover-9", type: "image", src: "/images/gallery/takeout/What You Mean to Me.jpg", alt: "What You Mean To Me cover (alt)", category: "cover", title: "What You Mean To Me" },
   // Shared Drive - Logos & Graphics (from G:\Shared drives\Vermont Ave\Graphics)
   { id: "sd-logo-1", type: "image", src: "/images/gallery/shared-drive/BD82F921-0B1A-4C4C-930F-47066ED29A19.PNG", alt: "Vermont Avenue Records logo variant", category: "brand", title: "Logo variant" },
   { id: "sd-logo-2", type: "image", src: "/images/gallery/shared-drive/23D4D93D-A3A2-4B13-9827-2CA0B06D6079.PNG", alt: "Vermont Avenue Records logo variant", category: "brand", title: "Logo variant" },

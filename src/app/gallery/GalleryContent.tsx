@@ -29,7 +29,7 @@ const categoryMap: Record<Category, GalleryItemType["category"]> = {
   "Cover Art": "cover",
   "Flyers & Posters": "flyer",
   Branding: "brand",
-  Merch: "cover",
+  Merch: "merch",
 };
 
 export function GalleryContent() {
@@ -106,10 +106,6 @@ export function GalleryContent() {
           </p>
           <div
             className="mt-10 masonry"
-            style={{
-              columnCount: 1,
-              columnGap: "1rem",
-            } as React.CSSProperties}
             role="list"
             aria-label={`${activeCategory} gallery`}
           >

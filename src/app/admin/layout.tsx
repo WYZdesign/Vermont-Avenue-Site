@@ -16,8 +16,8 @@ const links: Array<[string, string]> = [
   ["Logistics", "/admin/logistics"],
   ["Subscribers", "/admin/subscribers"],
   ["Content", "/admin/content"],
-  ["Shows", "/shows"],
-  ["Roster", "/about"],
+  ["Shows", "/admin/shows"],
+  ["Roster", "/admin/roster"],
 ];
 
 export default async function AdminLayout({

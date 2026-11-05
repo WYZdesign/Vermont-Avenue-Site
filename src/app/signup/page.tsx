@@ -17,6 +17,13 @@ export default async function SignupPage() {
 
   return (
     <section className="dark min-h-screen">
+      <header className="border-b border-[var(--line-invert)] bg-[rgba(244,241,232,0.02)]">
+        <div className="wrap flex h-14 items-center">
+          <Link href="/" className="font-display text-lg tracking-tight text-white/90 hover:text-white">
+            Vermont Avenue Records
+          </Link>
+        </div>
+      </header>
       <div className="wrap flex min-h-screen items-center justify-center py-16">
         <div className="w-full max-w-md border border-[var(--line-invert)] bg-[rgba(244,241,232,0.03)] p-8">
           <span className="eyebrow">Join the block</span>

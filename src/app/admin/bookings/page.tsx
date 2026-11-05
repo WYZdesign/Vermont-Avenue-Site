@@ -2,6 +2,27 @@ import { query } from "@/lib/db";
 import type { Booking } from "@/lib/types";
 import { BookingStatusSelect } from "./BookingStatusSelect";
 
+function money(cents: number | string | null | undefined): string {
+  if (!cents) return "TBD";
+  const num = typeof cents === "string" ? parseInt(cents, 10) : cents;
+  if (Number.isNaN(num)) return "TBD";
+  return "$" + (num / 100).toLocaleString("en-US", { minimumFractionDigits: 2 });
+}
+
+function fmtDate(value: string | null | undefined): string {
+  if (!value) return "TBD";
+  const d = new Date(value + "T12:00:00");
+  if (Number.isNaN(d.getTime())) return value;
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" });
+}
+
+function fmtDateTime(value: string | null | undefined): string {
+  if (!value) return "TBD";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return value;
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" });
+}
+
 export const dynamic = "force-dynamic";
 
 export default async function AdminBookingsPage() {
@@ -36,7 +57,7 @@ export default async function AdminBookingsPage() {
           <tbody>
             {rows.map((row) => (
               <tr key={row.id} className="border-b border-[var(--line-soft)] last:border-0 align-top">
-                <td className="p-3 whitespace-nowrap muted">{new Date(row.created_at).toLocaleDateString()}</td>
+                <td className="p-3 whitespace-nowrap muted">{fmtDateTime(row.created_at)}</td>
                 <td className="p-3">
                   <span className="block">{row.name}</span>
                   <a href={"mailto:" + row.email} className="block text-xs underline">{row.email}</a>
@@ -44,9 +65,9 @@ export default async function AdminBookingsPage() {
                 </td>
                 <td className="p-3">{row.event_type}</td>
                 <td className="p-3">{row.act}</td>
-                <td className="p-3 whitespace-nowrap">{row.event_date || "TBD"}</td>
+                <td className="p-3 whitespace-nowrap">{fmtDate(row.event_date)}</td>
                 <td className="p-3">{row.venue || "TBD"}</td>
-                <td className="p-3">{row.budget || "TBD"}</td>
+                <td className="p-3">{money(row.budget)}</td>
                 <td className="p-3">
                   <BookingStatusSelect id={row.id} status={row.status} />
                 </td>
