@@ -116,3 +116,37 @@ create index if not exists idx_sessions_user on sessions(user_id);
 create index if not exists idx_invoices_status on invoices(status);
 create index if not exists idx_clients_email on clients(lower(email));
 create index if not exists idx_logistics_date on logistics(event_date);
+
+create table if not exists shows (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  date date not null,
+  venue text not null,
+  city text not null,
+  state text not null,
+  status text not null default 'tentative' check (status in ('tentative', 'confirmed', 'cancelled')),
+  act text not null,
+  notes text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists roster (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  email text,
+  phone text,
+  role text not null,
+  instruments text,
+  genres text,
+  bio text,
+  avatar_url text,
+  active boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists idx_shows_date on shows(date);
+create index if not exists idx_shows_status on shows(status);
+create index if not exists idx_roster_name on roster(name);
+create index if not exists idx_roster_active on roster(active);

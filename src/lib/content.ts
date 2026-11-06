@@ -22,6 +22,7 @@ export const nav = [
   { label: "Releases", href: "/releases" },
   { label: "Watch", href: "/watch" },
   { label: "Gallery", href: "/gallery" },
+  { label: "Media", href: "/media" },
 ] as const;
 
 /* -------------------------------------------------------------------------- */
@@ -458,6 +459,21 @@ export const gallery: GalleryItem[] = [
   // Rehearsal extended clips frames (Benji Angle)
   { id: "rehearsal-1", type: "image", src: "/images/gallery/shared-drive/video-frames/rehearsal_benji1_001.jpg", alt: "Benji drum rehearsal", category: "rehearsal", title: "Drum rehearsal" },
   { id: "rehearsal-2", type: "image", src: "/images/gallery/shared-drive/video-frames/rehearsal_benji1_002.jpg", alt: "Benji drum rehearsal", category: "rehearsal", title: "Drum rehearsal" },
+  // Sept 13, 2026 session — extracted frames
+  { id: "sept13-1", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3277_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-2", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3278_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-3", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3280_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-4", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3281_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-5", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3282_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-6", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3283_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-7", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3284_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-8", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3285_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-9", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3290_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-10", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3291_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-11", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3300_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-12", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3308_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-13", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3311_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  { id: "sept13-14", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3325_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
 ];
 
 export function getGalleryByCategory(category: GalleryItem["category"]) {
