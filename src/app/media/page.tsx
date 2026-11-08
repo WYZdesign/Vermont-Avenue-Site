@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 import { PageHero, SectionLabel } from "@/components/SectionLabel";
 import { VideoEmbed } from "@/components/VideoEmbed";
-import { getGalleryImages, gallery, socialProfiles, site } from "@/lib/content";
+import { socialProfiles, site } from "@/lib/content";
 import { YOUTUBE_CHANNEL_URL } from "@/lib/youtube";
+import { GalleryContent } from "@/app/gallery/GalleryContent";
 
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
   title: "Media",
   description:
-    "All videos, photos, and live streams from Vermont Avenue Records — the complete media archive.",
+    "Videos, photos, and live footage from Vermont Avenue Records in Los Angeles.",
   alternates: { canonical: "/media" },
 };
 
-export default function MediaPage() {
-  const images = getGalleryImages();
-  const videos = gallery.filter((item) => item.type !== "image");
+const ytPlaylistId = "UU5Od8j7DxMtUqbc68WBflQg";
 
+export default function MediaPage() {
   return (
     <>
       <PageHero
@@ -28,7 +28,7 @@ export default function MediaPage() {
             <span className="serif text-[var(--color-sage)]">archive.</span>
           </>
         }
-        intro="All videos, photos, and live streams from Vermont Avenue Records."
+        intro="Videos, live footage, photos, and the whole visual archive. Watch, scroll, and follow."
       >
         <div className="flex flex-wrap gap-3">
           <a
@@ -55,14 +55,6 @@ export default function MediaPage() {
           >
             Instagram
           </a>
-          <a
-            href={site.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-ghost"
-          >
-            Facebook
-          </a>
         </div>
       </PageHero>
 
@@ -70,50 +62,15 @@ export default function MediaPage() {
         <div className="wrap">
           <SectionLabel>Videos</SectionLabel>
           <h2 className="h2 mt-5">On the channel.</h2>
-
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {videos.map((video) => (
-              <div key={video.id}>
-                <VideoEmbed id={video.id} title={video.title || "Video"} />
-                <h3 className="h3 mt-4 text-lg">{video.title || "Video"}</h3>
-                <p className="mt-1 text-[0.66rem] uppercase tracking-[0.14em] muted">
-                  {video.category}
-                </p>
-              </div>
-            ))}
+          <div className="mt-10 max-w-4xl">
+            <VideoEmbed id={ytPlaylistId} title="Vermont Avenue Records — All Videos" isPlaylist />
           </div>
         </div>
       </section>
 
-      <section className="section section-tight">
-        <div className="wrap">
-          <SectionLabel>Photos</SectionLabel>
-          <h2 className="h2 mt-5">Gallery archive.</h2>
+      <GalleryContent />
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {images.map((item) => (
-              <a
-                key={item.id}
-                href={item.src}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative group cursor-zoom-in border border-[var(--line)] overflow-hidden rounded-md hover:scale-[105%] transition-transform duration-300"
-              >
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="w-full h-48 object-cover transition-opacity duration-300 group-hover:opacity-90"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xs uppercase">
-                  {item.category}
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-tight">
+      <section className="section-tight">
         <div className="wrap">
           <SectionLabel>Social</SectionLabel>
           <h2 className="h2 mt-5">Follow the label.</h2>

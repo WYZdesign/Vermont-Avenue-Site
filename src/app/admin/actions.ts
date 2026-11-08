@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
 import { query } from "@/lib/db";
 import { buildPerformanceContract } from "@/lib/contracts";
@@ -312,4 +313,136 @@ export async function saveSocialPostAction(form: FormData): Promise<void> {
   if (!id || !content) return;
   await query("update social_posts set content = $1, updated_at = now() where id = $2", [content, id]);
   revalidatePath("/admin/social");
+}
+
+/* -------------------------------------------------------------------------- */
+/* SHOWS                                                                      */
+/* -------------------------------------------------------------------------- */
+
+const showStatuses = ["tentative", "confirmed", "cancelled"];
+
+export async function createShowAction(form: FormData): Promise<void> {
+  await requireAdmin();
+  const name = str(form, "name");
+  const date = str(form, "date");
+  const venue = str(form, "venue");
+  const city = str(form, "city");
+  const state = str(form, "state");
+  const act = str(form, "act");
+  if (!name || !date || !venue || !city || !state || !act) return;
+  const status = str(form, "status");
+  await query(
+    `insert into shows (name, date, venue, city, state, status, act, notes)
+     values ($1,$2,$3,$4,$5,$6,$7,$8)`,
+    [
+      name,
+      date,
+      venue,
+      city,
+      state,
+      showStatuses.includes(status) ? status : "tentative",
+      act,
+      str(form, "notes") || null,
+    ]
+  );
+  revalidatePath("/admin/shows");
+  revalidatePath("/shows");
+  redirect("/admin/shows");
+}
+
+export async function updateShowAction(form: FormData): Promise<void> {
+  await requireAdmin();
+  const id = str(form, "id");
+  if (!id) return;
+  const status = str(form, "status");
+  await query(
+    `update shows set name = $1, date = $2, venue = $3, city = $4, state = $5,
+       status = $6, act = $7, notes = $8, updated_at = now()
+     where id = $9`,
+    [
+      str(form, "name"),
+      str(form, "date"),
+      str(form, "venue"),
+      str(form, "city"),
+      str(form, "state"),
+      showStatuses.includes(status) ? status : "tentative",
+      str(form, "act"),
+      str(form, "notes") || null,
+      id,
+    ]
+  );
+  revalidatePath("/admin/shows");
+  revalidatePath("/admin/shows/" + id);
+  revalidatePath("/shows");
+}
+
+export async function deleteShowAction(form: FormData): Promise<void> {
+  await requireAdmin();
+  const id = str(form, "id");
+  if (!id) return;
+  await query("delete from shows where id = $1", [id]);
+  revalidatePath("/admin/shows");
+  revalidatePath("/shows");
+}
+
+/* -------------------------------------------------------------------------- */
+/* ROSTER                                                                     */
+/* -------------------------------------------------------------------------- */
+
+export async function createRosterAction(form: FormData): Promise<void> {
+  await requireAdmin();
+  const name = str(form, "name");
+  const role = str(form, "role");
+  if (!name || !role) return;
+  await query(
+    `insert into roster (name, email, phone, role, instruments, genres, bio, avatar_url, active)
+     values ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+    [
+      name,
+      str(form, "email") || null,
+      str(form, "phone") || null,
+      role,
+      str(form, "instruments") || null,
+      str(form, "genres") || null,
+      str(form, "bio") || null,
+      str(form, "avatar_url") || null,
+      str(form, "active") === "on",
+    ]
+  );
+  revalidatePath("/admin/roster");
+  redirect("/admin/roster");
+}
+
+export async function updateRosterAction(form: FormData): Promise<void> {
+  await requireAdmin();
+  const id = str(form, "id");
+  const name = str(form, "name");
+  if (!id || !name) return;
+  await query(
+    `update roster set name = $1, email = $2, phone = $3, role = $4,
+       instruments = $5, genres = $6, bio = $7, avatar_url = $8, active = $9, updated_at = now()
+     where id = $10`,
+    [
+      name,
+      str(form, "email") || null,
+      str(form, "phone") || null,
+      str(form, "role") || "member",
+      str(form, "instruments") || null,
+      str(form, "genres") || null,
+      str(form, "bio") || null,
+      str(form, "avatar_url") || null,
+      str(form, "active") === "on",
+      id,
+    ]
+  );
+  revalidatePath("/admin/roster");
+  revalidatePath("/admin/roster/" + id);
+}
+
+export async function deleteRosterAction(form: FormData): Promise<void> {
+  await requireAdmin();
+  const id = str(form, "id");
+  if (!id) return;
+  await query("delete from roster where id = $1", [id]);
+  revalidatePath("/admin/roster");
 }

@@ -547,3 +547,46 @@ textarea {
   mix-blend-mode: soft-light;
   opacity: 0.06;
 }
+
+/* ---------- media tone ----------
+   50% desaturated with a green split-tone at rest. On hover the image
+   snaps to full (slightly boosted) color. Images keep their true
+   proportions inside a square tile (object-cover, never stretched). */
+.media-tone {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-forest);
+}
+
+.media-tone img {
+  filter: saturate(0.5) contrast(1.05);
+  transition: filter 0.5s var(--ease), transform 0.6s var(--ease);
+}
+
+.media-tone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-forest) 0%, var(--color-sage) 100%);
+  mix-blend-mode: soft-light;
+  opacity: 0.42;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease);
+}
+
+.media-tone:hover img,
+.group:hover .media-tone img {
+  filter: saturate(1.18) contrast(1.08) brightness(1.04);
+  transform: scale(1.04);
+}
+
+.media-tone:hover::after,
+.group:hover .media-tone::after {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media-tone img {
+    transition: none;
+  }
+}

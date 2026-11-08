@@ -32,7 +32,13 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-5 lg:flex">
+          <Link
+            href="/login"
+            className="text-[0.66rem] uppercase tracking-[0.16em] underline decoration-transparent underline-offset-4 transition-colors hover:text-[var(--color-forest)] hover:decoration-current"
+          >
+            Sign in
+          </Link>
           <Link href="/book" className="btn">
             Book
           </Link>
@@ -71,6 +77,13 @@ export function SiteHeader() {
             ))}
             <Link href="/book" onClick={() => setOpen(false)} className="btn mt-4">
               Book the band
+            </Link>
+            <Link
+              href="/login"
+              onClick={() => setOpen(false)}
+              className="btn btn-ghost mt-3"
+            >
+              Sign in
             </Link>
           </nav>
         </div>

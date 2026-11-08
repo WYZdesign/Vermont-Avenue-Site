@@ -20,8 +20,6 @@ export const nav = [
   { label: "About", href: "/about" },
   { label: "Live Bands/DJs", href: "/services" },
   { label: "Releases", href: "/releases" },
-  { label: "Watch", href: "/watch" },
-  { label: "Gallery", href: "/gallery" },
   { label: "Media", href: "/media" },
 ] as const;
 
@@ -384,8 +382,6 @@ export const gallery: GalleryItem[] = [
   { id: "cover-5", type: "image", src: "/images/therapy.jpg", alt: "Therapy cover", category: "cover", title: "Therapy" },
   { id: "cover-6", type: "image", src: "/images/ryan-turn-your-heart.jpg", alt: "Turn Your Heart to Mine cover", category: "cover", title: "Turn Your Heart to Mine" },
   { id: "cover-7", type: "image", src: "/images/sophia-what-you-mean-to-me.jpg", alt: "What You Mean To Me cover", category: "cover", title: "What You Mean To Me" },
-  // Additional covers from Takeout
-  { id: "cover-8", type: "image", src: "/images/gallery/takeout/LimesCover.jpg", alt: "The LA Limes cover", category: "cover", title: "The LA Limes" },
   // Shared Drive - Logos & Graphics (from G:\Shared drives\Vermont Ave\Graphics)
   { id: "sd-logo-1", type: "image", src: "/images/gallery/shared-drive/BD82F921-0B1A-4C4C-930F-47066ED29A19.PNG", alt: "Vermont Avenue Records logo variant", category: "brand", title: "Logo variant" },
   { id: "sd-logo-2", type: "image", src: "/images/gallery/shared-drive/23D4D93D-A3A2-4B13-9827-2CA0B06D6079.PNG", alt: "Vermont Avenue Records logo variant", category: "brand", title: "Logo variant" },
@@ -395,28 +391,6 @@ export const gallery: GalleryItem[] = [
   { id: "sd-logo-6", type: "image", src: "/images/gallery/shared-drive/ChatGPT Image Aug 4, 2026, 11_19_51 PM.png", alt: "Vermont Avenue Records AI concept logo", category: "brand", title: "AI concept logo" },
   { id: "sd-logo-7", type: "image", src: "/images/gallery/shared-drive/IMG_9595 2.PNG", alt: "Vermont Avenue Records street sign photo", category: "brand", title: "Street sign photo" },
   { id: "sd-flyer-1", type: "image", src: "/images/gallery/shared-drive/Untitled-1.JPEG", alt: "Vermont Avenue Records flyer", category: "flyer", title: "Promotional flyer" },
-  // Takeout - Artist photos & shoots
-  { id: "shoot-1", type: "image", src: "/images/gallery/takeout/Ryan Washington (1).jpg", alt: "Ryan Washington portrait", category: "shoot", title: "Ryan Washington" },
-  { id: "shoot-2", type: "image", src: "/images/gallery/takeout/artist-dantes.jpg", alt: "The Dante's Inferno band photo", category: "shoot", title: "The Dante's Inferno" },
-  { id: "shoot-3", type: "image", src: "/images/gallery/takeout/IMG_3321.jpeg", alt: "Band rehearsal candid", category: "shoot", title: "Rehearsal candid" },
-  { id: "shoot-4", type: "image", src: "/images/gallery/takeout/IMG_3324.jpeg", alt: "Live performance shot", category: "event", title: "Live performance" },
-  // Takeout - AI concept logos & branding
-  { id: "brand-ai-1", type: "image", src: "/images/gallery/takeout/image_ac7ebb.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-2", type: "image", src: "/images/gallery/takeout/image_ac6456.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-3", type: "image", src: "/images/gallery/takeout/image_ac6bef.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-4", type: "image", src: "/images/gallery/takeout/image_ac6bef (1).png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-5", type: "image", src: "/images/gallery/takeout/image_ace46e.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-6", type: "image", src: "/images/gallery/takeout/image_ace7b0.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-7", type: "image", src: "/images/gallery/takeout/image_acf313.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-8", type: "image", src: "/images/gallery/takeout/image_9edf92.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-9", type: "image", src: "/images/gallery/takeout/image_b8aa1c.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-10", type: "image", src: "/images/gallery/takeout/image_b8c442.jpg", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-11", type: "image", src: "/images/gallery/takeout/image_b6e7a1.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-12", type: "image", src: "/images/gallery/takeout/image_b763dc.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-13", type: "image", src: "/images/gallery/takeout/image_b763dc (1).png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-14", type: "image", src: "/images/gallery/takeout/image_b8a9df.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-15", type: "image", src: "/images/gallery/takeout/image_b8a9bd.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
-  { id: "brand-ai-16", type: "image", src: "/images/gallery/takeout/image_b8419c.png", alt: "AI concept logo variant", category: "brand", title: "AI concept logo" },
   // Drive zip video frames - IMG_6337.MOV (rehearsal content)
   { id: "vidframe-1", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_001.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
   { id: "vidframe-2", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_002.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },

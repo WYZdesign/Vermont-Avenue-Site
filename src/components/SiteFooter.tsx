@@ -24,8 +24,7 @@ const columns = [
   {
     title: "Listen",
     links: [
-      { label: "Watch", href: "/watch" },
-      { label: "Gallery", href: "/gallery" },
+      { label: "Media", href: "/media" },
       { label: "Bandcamp", href: site.bandcamp },
       { label: "Spotify", href: site.spotify },
       { label: "YouTube", href: site.youtube },
@@ -105,7 +104,11 @@ export function SiteFooter() {
           <span>
             &copy; {new Date().getFullYear()} Vermont Avenue Records
           </span>
-          <span>Est. Los Angeles, 2024</span>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="hover:text-bone">Privacy</Link>
+            <Link href="/terms" className="hover:text-bone">Terms</Link>
+            <span>Est. Los Angeles, 2024</span>
+          </div>
         </div>
       </div>
     </footer>

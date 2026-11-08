@@ -105,34 +105,29 @@ export function GalleryContent() {
             {filteredImages.length} {activeCategory === "All" ? "items" : activeCategory.toLowerCase()} found
           </p>
           <div
-            className="mt-10 masonry"
+            className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             role="list"
             aria-label={`${activeCategory} gallery`}
           >
             {filteredImages.map((item, index) => (
               <div
                 key={item.id}
-                className="masonry-item break-inside-avoid mb-4"
                 role="listitem"
                 onClick={() => openLightbox(item, index)}
-                style={{ cursor: "zoom-in" }}
+                className="group media-tone aspect-square cursor-zoom-in border border-[var(--line)]"
               >
-                <div className="relative border border-[var(--line)] bg-bone overflow-hidden aspect-[4/3]">
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                    className="object-cover transition-transform duration-300 hover:scale-[1.02]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <div className="w-full">
-                      <p className="text-sm font-semibold text-white">{item.title ?? item.alt}</p>
-                      <p className="text-[0.62rem] uppercase tracking-[0.14em] text-white/70">
-                        {item.category}
-                      </p>
-                    </div>
-                  </div>
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover"
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent p-3 opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
+                  <p className="text-xs font-semibold text-white">{item.title ?? item.alt}</p>
+                  <p className="text-[0.56rem] uppercase tracking-[0.14em] text-white/70">
+                    {item.category}
+                  </p>
                 </div>
               </div>
             ))}

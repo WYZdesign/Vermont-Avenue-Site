@@ -93,13 +93,11 @@ export default async function AdminHome() {
             <p className="display text-2xl mt-1">Calendar</p>
           </Link>
           <Link
-            href="https://noco.wyzmind.tech"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/admin/shows/new"
             className="border border-[var(--line)] bg-bone p-4 transition-colors hover:bg-ink hover:text-white"
           >
-            <p className="text-[0.58rem] uppercase tracking-[0.14em] opacity-60 mb-1">Tasks</p>
-            <p className="display text-2xl mt-1">NocoDB</p>
+            <p className="text-[0.58rem] uppercase tracking-[0.14em] opacity-60 mb-1">Add</p>
+            <p className="display text-2xl mt-1">New show</p>
           </Link>
         </div>
       </div>

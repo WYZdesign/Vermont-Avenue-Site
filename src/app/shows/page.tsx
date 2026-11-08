@@ -1,73 +1,108 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { query } from "@/lib/db";
 
-export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
-type NocoRecord = {
+export const metadata: Metadata = {
+  title: "Shows",
+  description:
+    "Upcoming live dates from Vermont Avenue Records — bands, DJs, and the full collective across Los Angeles.",
+  alternates: { canonical: "/shows" },
+};
+
+type Show = {
   id: string;
-  Band_s?: string;
-  Type_s?: string;
-  Date?: string;
-  Venue_s?: string;
-  Status_s?: string;
+  name: string;
+  date: string;
+  venue: string;
+  city: string;
+  state: string;
+  status: string;
+  act: string;
 };
 
-type ShowsResponse = {
-  list: NocoRecord[];
-};
-
-async function fetchShows(): Promise<NocoRecord[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/noco/shows?table=Shows&limit=100`, {
-    cache: "no-store",
-  });
-  if (!res.ok) return [];
-  const data = (await res.json()) as ShowsResponse;
-  return data.list ?? [];
-}
-
-function parseDate(dateStr: string | undefined) {
-  if (!dateStr) return "TBA";
-  const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return dateStr;
+function parseDate(value: string | null | undefined) {
+  if (!value) return "TBA";
+  const d = new Date(value);
+  if (isNaN(d.getTime())) return String(value);
   return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 }
 
-export default async function ShowsPage() {
-  const shows: NocoRecord[] = await fetchShows();
+async function getShows(): Promise<Show[]> {
+  try {
+    return await query<Show>(
+      `select id, name, date, venue, city, state, status, act
+       from shows
+       where status <> 'cancelled'
+       order by date asc`
+    );
+  } catch {
+    return [];
+  }
+}
 
-  const upcoming = shows.filter((s: NocoRecord) => !s.Date || new Date(s.Date) >= new Date());
-  const past = shows.filter((s) => s.Date && new Date(s.Date) < new Date());
+export default async function ShowsPage() {
+  const shows = await getShows();
+  const now = new Date();
+  const upcoming = shows.filter((s) => !s.date || new Date(s.date) >= now);
+  const past = shows.filter((s) => s.date && new Date(s.date) < now);
 
   return (
-    <div className="space-y-12">
+    <div className="wrap section space-y-12">
       <section>
-        <h1 className="h1 mb-4">Upcoming Shows</h1>
-        <p className="muted">All scheduled gigs for John and the band.</p>
+        <span className="eyebrow">Live</span>
+        <h1 className="h1 mt-4">Upcoming shows</h1>
+        <p className="lede mt-4">
+          Catch Vermont Avenue Records live across Los Angeles. Want the band at your
+          event? <Link href="/book" className="underline">Book a date.</Link>
+        </p>
       </section>
 
-      {upcoming.length === 0 && (
-        <p className="text-sm text-muted">No upcoming shows scheduled. Check back later!</p>
+      {upcoming.length === 0 ? (
+        <p className="text-sm muted">
+          No upcoming shows scheduled yet.{" "}
+          <Link href="/book" className="underline">Book the collective</Link> for your event.
+        </p>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {upcoming.map((show) => (
+            <div
+              key={show.id}
+              className="border border-[var(--line)] bg-[var(--color-paper)] p-5 transition-colors hover:border-[var(--color-forest)]"
+            >
+              <h3 className="display text-lg">{show.name}</h3>
+              <p className="text-sm muted mb-2">{parseDate(show.date)}</p>
+              <p className="text-sm mb-1">{show.venue}</p>
+              <p className="text-sm muted mb-3">
+                {show.city}, {show.state}
+              </p>
+              <div className="flex items-center gap-2">
+                <span className="text-xs uppercase tracking-[0.14em] border border-[var(--color-forest)] px-2 py-0.5 text-[var(--color-forest)]">
+                  {show.act}
+                </span>
+                <span className="text-xs uppercase tracking-[0.14em] muted">{show.status}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {upcoming.map((show: NocoRecord) => (
-          <div
-            key={show.id}
-            className="border border-[var(--line)] bg-[color:var(--color-paper)] p-5 transition-colors hover:border-[var(--color-forest)]"
-          >
-            <h3 className="display text-lg">{show.Band_s || "JB Set"}</h3>
-            <p className="text-sm muted mb-2">{parseDate(show.Date)}</p>
-            <p className="text-sm mb-2">{show.Venue_s || "Venue"}</p>
-            <span className="text-xs uppercase tracking-[0.14em] border border-[var(--color-forest)] px-2 py-0.5 text-[var(--color-forest)]">
-              {show.Status_s || "Upcoming"}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <section>
-        <h2 className="h3 mb-4">Past Shows</h2>
-        {past.length === 0 && <p className="text-sm text-muted">No past shows recorded.</p>}
-      </section>
+      {past.length > 0 && (
+        <section>
+          <h2 className="h3 mb-4">Past shows</h2>
+          <ul className="divide-y divide-[var(--line-soft)] border-y border-[var(--line-soft)] text-sm">
+            {past.map((show) => (
+              <li key={show.id} className="flex flex-wrap items-center justify-between gap-2 py-3">
+                <span className="font-medium">{show.name}</span>
+                <span className="muted">
+                  {show.venue} · {parseDate(show.date)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   );
 }
