@@ -121,7 +121,7 @@ export function GalleryContent() {
                   alt={item.alt}
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent p-3 opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
                   <p className="text-xs font-semibold text-white">{item.title ?? item.alt}</p>

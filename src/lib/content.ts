@@ -448,6 +448,17 @@ export const gallery: GalleryItem[] = [
   { id: "sept13-12", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3308_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
   { id: "sept13-13", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3311_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
   { id: "sept13-14", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3325_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
+  // Podcast studio sessions (Vids\Podcasts — MVI_5241..5246)
+  { id: "podcast-1", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5241_001.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
+  { id: "podcast-2", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5241_002.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
+  { id: "podcast-3", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5242_001.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
+  { id: "podcast-4", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5242_002.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
+  { id: "podcast-5", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5243_001.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
+  { id: "podcast-6", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5243_002.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
+  { id: "podcast-7", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5245_001.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
+  { id: "podcast-8", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5245_002.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
+  { id: "podcast-9", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5246_001.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
+  { id: "podcast-10", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5246_002.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
 ];
 
 export function getGalleryByCategory(category: GalleryItem["category"]) {
