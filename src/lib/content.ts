@@ -459,6 +459,16 @@ export const gallery: GalleryItem[] = [
   { id: "podcast-8", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5245_002.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
   { id: "podcast-9", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5246_001.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
   { id: "podcast-10", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5246_002.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
+  // Rehearsal angles (Vids\Extended Clips\Rehearsal — Adrian / Benji / Dante)
+  { id: "angle-1", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_adrian_001.jpg", alt: "Rehearsal, Adrian angle", category: "rehearsal", title: "Rehearsal, Adrian angle" },
+  { id: "angle-2", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_adrian_002.jpg", alt: "Rehearsal, Adrian angle", category: "rehearsal", title: "Rehearsal, Adrian angle" },
+  { id: "angle-3", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_candid_001.jpg", alt: "Rehearsal, off the cuff", category: "rehearsal", title: "Rehearsal, off the cuff" },
+  { id: "angle-4", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_benji_001.jpg", alt: "Rehearsal, Benji angle", category: "rehearsal", title: "Rehearsal, Benji angle" },
+  { id: "angle-5", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_benji_002.jpg", alt: "Rehearsal, Benji angle", category: "rehearsal", title: "Rehearsal, Benji angle" },
+  { id: "angle-6", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_benji_003.jpg", alt: "Rehearsal, bass and keys", category: "rehearsal", title: "Rehearsal, bass and keys" },
+  { id: "angle-7", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_dante_001.jpg", alt: "Rehearsal, Dante angle", category: "rehearsal", title: "Rehearsal, Dante angle" },
+  { id: "angle-8", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_dante_002.jpg", alt: "Rehearsal, Dante angle", category: "rehearsal", title: "Rehearsal, Dante angle" },
+  { id: "angle-9", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_dante_003.jpg", alt: "Rehearsal, Dante angle", category: "rehearsal", title: "Rehearsal, Dante angle" },
 ];
 
 export function getGalleryByCategory(category: GalleryItem["category"]) {
