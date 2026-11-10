@@ -391,15 +391,6 @@ export const gallery: GalleryItem[] = [
   { id: "sd-logo-6", type: "image", src: "/images/gallery/shared-drive/ChatGPT Image Aug 4, 2026, 11_19_51 PM.png", alt: "Vermont Avenue Records AI concept logo", category: "brand", title: "AI concept logo" },
   { id: "sd-logo-7", type: "image", src: "/images/gallery/shared-drive/IMG_9595 2.PNG", alt: "Vermont Avenue Records street sign photo", category: "brand", title: "Street sign photo" },
   { id: "sd-flyer-1", type: "image", src: "/images/gallery/shared-drive/Untitled-1.JPEG", alt: "Vermont Avenue Records flyer", category: "flyer", title: "Promotional flyer" },
-  // Drive zip video frames - IMG_6337.MOV (rehearsal content)
-  { id: "vidframe-1", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_001.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
-  { id: "vidframe-2", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_002.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
-  { id: "vidframe-3", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_003.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
-  { id: "vidframe-4", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_004.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
-  { id: "vidframe-5", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_005.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
-  { id: "vidframe-6", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_006.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
-  { id: "vidframe-7", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_007.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
-  { id: "vidframe-8", type: "image", src: "/images/gallery/shared-drive/video-frames/img6337_008.jpg", alt: "Rehearsal session frame", category: "rehearsal", title: "Rehearsal moment" },
   // Drive zip video frames - P1058860.MP4 (event content)
   { id: "vidframe-9", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_001.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
   { id: "vidframe-10", type: "image", src: "/images/gallery/shared-drive/video-frames/p1058860_002.jpg", alt: "Event performance frame", category: "event", title: "Live performance" },
@@ -428,11 +419,6 @@ export const gallery: GalleryItem[] = [
   { id: "vidframe-30", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi3277_001.jpg", alt: "Event footage frame", category: "event", title: "Event footage" },
   { id: "vidframe-31", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi3284_001.jpg", alt: "Event footage frame", category: "event", title: "Event footage" },
   { id: "vidframe-32", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi3284_002.jpg", alt: "Event footage frame", category: "event", title: "Event footage" },
-  { id: "vidframe-33", type: "image", src: "/images/gallery/shared-drive/video-frames/rehearsal_benji1_001.jpg", alt: "Benji rehearsal angle", category: "rehearsal", title: "Benji rehearsal" },
-  { id: "vidframe-34", type: "image", src: "/images/gallery/shared-drive/video-frames/rehearsal_benji1_002.jpg", alt: "Benji rehearsal angle", category: "rehearsal", title: "Benji rehearsal" },
-  // Rehearsal extended clips frames (Benji Angle)
-  { id: "rehearsal-1", type: "image", src: "/images/gallery/shared-drive/video-frames/rehearsal_benji1_001.jpg", alt: "Benji drum rehearsal", category: "rehearsal", title: "Drum rehearsal" },
-  { id: "rehearsal-2", type: "image", src: "/images/gallery/shared-drive/video-frames/rehearsal_benji1_002.jpg", alt: "Benji drum rehearsal", category: "rehearsal", title: "Drum rehearsal" },
   // Sept 13, 2026 session — extracted frames
   { id: "sept13-1", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3277_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
   { id: "sept13-2", type: "image", src: "/images/gallery/shared-drive/video-frames/mvi_3278_001.jpg", alt: "Sept 13 session", category: "event", title: "Sept 13 live" },
@@ -459,16 +445,6 @@ export const gallery: GalleryItem[] = [
   { id: "podcast-8", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5245_002.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
   { id: "podcast-9", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5246_001.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
   { id: "podcast-10", type: "image", src: "/images/gallery/shared-drive/video-frames/podcast_5246_002.jpg", alt: "Studio podcast session", category: "social", title: "Studio session" },
-  // Rehearsal angles (Vids\Extended Clips\Rehearsal — Adrian / Benji / Dante)
-  { id: "angle-1", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_adrian_001.jpg", alt: "Rehearsal, Adrian angle", category: "rehearsal", title: "Rehearsal, Adrian angle" },
-  { id: "angle-2", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_adrian_002.jpg", alt: "Rehearsal, Adrian angle", category: "rehearsal", title: "Rehearsal, Adrian angle" },
-  { id: "angle-3", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_candid_001.jpg", alt: "Rehearsal, off the cuff", category: "rehearsal", title: "Rehearsal, off the cuff" },
-  { id: "angle-4", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_benji_001.jpg", alt: "Rehearsal, Benji angle", category: "rehearsal", title: "Rehearsal, Benji angle" },
-  { id: "angle-5", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_benji_002.jpg", alt: "Rehearsal, Benji angle", category: "rehearsal", title: "Rehearsal, Benji angle" },
-  { id: "angle-6", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_benji_003.jpg", alt: "Rehearsal, bass and keys", category: "rehearsal", title: "Rehearsal, bass and keys" },
-  { id: "angle-7", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_dante_001.jpg", alt: "Rehearsal, Dante angle", category: "rehearsal", title: "Rehearsal, Dante angle" },
-  { id: "angle-8", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_dante_002.jpg", alt: "Rehearsal, Dante angle", category: "rehearsal", title: "Rehearsal, Dante angle" },
-  { id: "angle-9", type: "image", src: "/images/gallery/shared-drive/video-frames/angle_dante_003.jpg", alt: "Rehearsal, Dante angle", category: "rehearsal", title: "Rehearsal, Dante angle" },
 ];
 
 export function getGalleryByCategory(category: GalleryItem["category"]) {

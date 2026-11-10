@@ -8,7 +8,6 @@ import type { GalleryItem as GalleryItemType } from "@/lib/content";
 
 const categories = [
   "All",
-  "Rehearsals",
   "Shoots",
   "Events",
   "Social",
@@ -22,7 +21,6 @@ type Category = typeof categories[number];
 
 const categoryMap: Record<Category, GalleryItemType["category"]> = {
   All: "cover",
-  Rehearsals: "rehearsal",
   Shoots: "shoot",
   Events: "event",
   Social: "social",
@@ -123,12 +121,6 @@ export function GalleryContent() {
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="object-contain"
                 />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent p-3 opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
-                  <p className="text-xs font-semibold text-white">{item.title ?? item.alt}</p>
-                  <p className="text-[0.56rem] uppercase tracking-[0.14em] text-white/70">
-                    {item.category}
-                  </p>
-                </div>
               </div>
             ))}
           </div>
@@ -176,7 +168,7 @@ export function GalleryContent() {
             </svg>
           </button>
           <div
-            className="relative max-w-[90vw] max-h-[90vh]"
+            className="relative w-[90vw] h-[90vh] sm:w-[85vw] sm:h-[85vh]"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -187,12 +179,6 @@ export function GalleryContent() {
               className="object-contain"
               priority
             />
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-ink/90 to-transparent text-white">
-              <p className="text-lg font-semibold">{lightboxItem.title ?? lightboxItem.alt}</p>
-              <p className="text-[0.62rem] uppercase tracking-[0.14em] text-white/70 mt-1">
-                {lightboxItem.category} &bull; {lightboxIndex + 1} of {filteredImages.length}
-              </p>
-            </div>
           </div>
         </div>
       )}
