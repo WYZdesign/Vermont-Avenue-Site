@@ -16,6 +16,7 @@ const links: Array<[string, string]> = [
   ["Logistics", "/admin/logistics"],
   ["Subscribers", "/admin/subscribers"],
   ["Content", "/admin/content"],
+  ["Media", "/admin/media"],
   ["Shows", "/admin/shows"],
   ["Roster", "/admin/roster"],
 ];

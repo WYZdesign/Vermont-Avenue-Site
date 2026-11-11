@@ -150,3 +150,66 @@ create index if not exists idx_shows_date on shows(date);
 create index if not exists idx_shows_status on shows(status);
 create index if not exists idx_roster_name on roster(name);
 create index if not exists idx_roster_active on roster(active);
+
+/* -------------------------------------------------------------------------- */
+/* CMS + MEDIA + ROLES (2026-11-10)                                           */
+/* -------------------------------------------------------------------------- */
+
+-- Roles: add "admin" (full access like owner). Team stays limited.
+do $$
+begin
+  if exists (
+    select 1 from information_schema.table_constraints
+    where constraint_name = 'users_role_check' and table_name = 'users'
+  ) then
+    alter table users drop constraint users_role_check;
+  end if;
+  alter table users add constraint users_role_check
+    check (role in ('owner', 'admin', 'team', 'client', 'fan'));
+end $$;
+
+-- Typed, grouped content blocks (CMS).
+alter table content_blocks add column if not exists group_name text;
+alter table content_blocks add column if not exists label text;
+alter table content_blocks add column if not exists type text not null default 'text';
+alter table content_blocks add column if not exists page text;
+alter table content_blocks add column if not exists sort integer not null default 0;
+alter table content_blocks add column if not exists meta jsonb not null default '{}'::jsonb;
+
+-- Media library. storage = 'db' (bytes in media_blobs) | 'r2' (object key) | 'url'.
+create table if not exists media (
+  id uuid primary key default gen_random_uuid(),
+  filename text not null,
+  mime text not null,
+  bytes integer not null default 0,
+  width integer,
+  height integer,
+  alt text,
+  tags text[] not null default '{}',
+  storage text not null default 'db',
+  key text,
+  url text,
+  created_by uuid references users(id) on delete set null,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists media_blobs (
+  media_id uuid primary key references media(id) on delete cascade,
+  data bytea not null
+);
+
+create index if not exists idx_media_created on media(created_at desc);
+
+-- Activity log (audit + simple progress).
+create table if not exists activity (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references users(id) on delete set null,
+  actor text,
+  action text not null,
+  entity text,
+  entity_id text,
+  meta jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists idx_activity_created on activity(created_at desc);

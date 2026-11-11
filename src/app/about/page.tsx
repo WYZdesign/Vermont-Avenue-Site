@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHero, SectionLabel } from "@/components/SectionLabel";
 import { about } from "@/lib/content";
+import { getContent } from "@/lib/content-db";
 
 export const metadata: Metadata = {
   title: "About",
@@ -11,7 +12,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
-export default function AboutPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AboutPage() {
+  const c = await getContent();
   return (
     <>
       <PageHero
@@ -23,14 +27,14 @@ export default function AboutPage() {
             <span className="serif text-[var(--color-sage)]">with the community.</span>
           </>
         }
-        intro={about.intro}
+        intro={c["about.intro"]}
       />
 
       <section className="section">
         <div className="wrap grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="duotone relative aspect-[4/5] w-full border border-[var(--line)]">
             <Image
-              src="/images/artist-ryan.jpg"
+              src={c["about.story.image"]}
               alt="Vermont Avenue Records collective"
               fill
               sizes="(max-width: 1024px) 100vw, 45vw"
@@ -45,10 +49,9 @@ export default function AboutPage() {
               <span className="serif text-forest">People always.</span>
             </h2>
             <div className="mt-6 space-y-5 text-[rgba(11,11,11,0.72)]">
-              {about.body.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-              <p>{about.founder}</p>
+              <p>{c["about.body.1"]}</p>
+              <p>{c["about.body.2"]}</p>
+              <p>{c["about.founder"]}</p>
             </div>
             <Link href="/book" className="btn mt-8">
               Work with us
@@ -82,8 +85,7 @@ export default function AboutPage() {
             <div className="mt-10">
               <SectionLabel>The mission</SectionLabel>
               <p className="mt-4 text-sm leading-relaxed text-[rgba(11,11,11,0.72)]">
-                Fair pay for artists. An inclusive room. Music that sounds like the
-                people who made it. That is the standard we hold ourselves to.
+                {c["about.mission"]}
               </p>
             </div>
           </div>

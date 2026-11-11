@@ -4,7 +4,8 @@ import { ActCard } from "@/components/ActCard";
 import { Marquee } from "@/components/Marquee";
 import { ReleaseItem } from "@/components/ReleaseItem";
 import { SectionLabel } from "@/components/SectionLabel";
-import { about, acts, releases, roster, site, gallery, getGalleryImages } from "@/lib/content";
+import { getContent } from "@/lib/content-db";
+import { acts, releases, roster, gallery, getGalleryImages } from "@/lib/content";
 
 const featuredActs = acts.filter((act) => act.featured);
 const featuredReleases = releases.slice(0, 4);
@@ -17,14 +18,17 @@ const stats = [
   ["2025", "First release"],
 ];
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const c = await getContent();
   return (
     <>
       <section className="dark relative overflow-hidden">
         <div className="deco-sun" aria-hidden="true" />
         <div className="wrap relative grid min-h-[86vh] items-center gap-14 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
           <div>
-            <span className="eyebrow">Independent label, Los Angeles</span>
+            <span className="eyebrow">{c["home.hero.eyebrow"]}</span>
             <h1 className="h1 mt-6">
               <span className="block">VERMONT</span>
               <span className="block text-[var(--color-sage)]">AVENUE</span>
@@ -36,10 +40,7 @@ export default function HomePage() {
                 Est. 2024
               </span>
             </div>
-            <p className="lede mt-6 max-w-lg">
-              {site.tagline} A record label and live music collective built with our
-              community in Los Angeles.
-            </p>
+            <p className="lede mt-6 max-w-lg">{c["home.hero.lede"]}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/book" className="btn">
                 Book the band
@@ -63,7 +64,7 @@ export default function HomePage() {
           <div className="relative">
             <div className="duotone relative aspect-square w-full border border-[var(--line-invert)]">
               <Image
-                src="/images/vermont-logo.jpg"
+                src={c["home.hero.image"]}
                 alt="Vermont Avenue Records street sign logo"
                 fill
                 priority
@@ -94,8 +95,8 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="space-y-5">
-            <p className="lede">{about.intro}</p>
-            <p className="text-[rgba(11,11,11,0.7)]">{about.body[0]}</p>
+            <p className="lede">{c["home.label.intro"]}</p>
+            <p className="text-[rgba(11,11,11,0.7)]">{c["home.label.body"]}</p>
             <Link href="/about" className="link-arrow mt-2">
               More about us
             </Link>

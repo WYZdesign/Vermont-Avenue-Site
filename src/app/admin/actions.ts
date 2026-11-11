@@ -89,6 +89,36 @@ export async function updateContentAction(form: FormData): Promise<void> {
   revalidatePath("/admin/content");
 }
 
+export async function saveAllContentAction(form: FormData): Promise<void> {
+  const user = await requireAdmin();
+  const { CONTENT_FIELDS } = await import("@/lib/content-fields");
+  for (const field of CONTENT_FIELDS) {
+    const value = str(form, field.key);
+    await query(
+      `insert into content_blocks (key, value, group_name, label, type, updated_at)
+       values ($1, $2, $3, $4, $5, now())
+       on conflict (key) do update set
+         value = excluded.value,
+         group_name = excluded.group_name,
+         label = excluded.label,
+         type = excluded.type,
+         updated_at = now()`,
+      [field.key, value, field.group, field.label, field.type]
+    );
+  }
+  try {
+    await query(
+      "insert into activity (user_id, actor, action, entity) values ($1, $2, $3, $4)",
+      [user.id, user.name, "content.save", "content_blocks"]
+    );
+  } catch {
+    // Activity logging is best-effort.
+  }
+  revalidatePath("/admin/content");
+  revalidatePath("/");
+  revalidatePath("/about");
+}
+
 export async function createLogisticsAction(form: FormData): Promise<void> {
   await requireAdmin();
   const eventDate = str(form, "event_date");

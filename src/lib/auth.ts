@@ -6,7 +6,7 @@ import { query } from "./db";
 const COOKIE = "va_session";
 const MAX_AGE = 60 * 60 * 24 * 30;
 
-export type Role = "owner" | "team" | "client" | "fan";
+export type Role = "owner" | "admin" | "team" | "client" | "fan";
 
 export type User = {
   id: string;
@@ -85,7 +85,15 @@ export async function getCurrentUser(): Promise<User | null> {
 }
 
 export function isAdmin(user: User | null): boolean {
-  return Boolean(user && (user.role === "owner" || user.role === "team"));
+  return Boolean(
+    user &&
+      (user.role === "owner" || user.role === "admin" || user.role === "team")
+  );
+}
+
+/** Owner and admin have full rights. Team is limited (no credentials/connections). */
+export function isPrivileged(user: User | null): boolean {
+  return Boolean(user && (user.role === "owner" || user.role === "admin"));
 }
 
 export async function requireUser(next = "/account"): Promise<User> {
