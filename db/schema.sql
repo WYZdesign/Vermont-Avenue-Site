@@ -213,3 +213,22 @@ create table if not exists activity (
 );
 
 create index if not exists idx_activity_created on activity(created_at desc);
+
+-- Rate limiting (login/signup/forms). Keyed by client IP + action.
+create table if not exists throttle (
+  key text primary key,
+  count integer not null default 1,
+  window_start timestamptz not null default now()
+);
+
+-- Integrations / connectors. `config` holds one encrypted blob: { __enc: "<base64>" }.
+create table if not exists connections (
+  id uuid primary key default gen_random_uuid(),
+  provider text unique not null,
+  label text not null,
+  status text not null default 'not_connected',
+  config jsonb not null default '{}'::jsonb,
+  connected_by uuid references users(id) on delete set null,
+  updated_at timestamptz not null default now(),
+  created_at timestamptz not null default now()
+);

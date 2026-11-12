@@ -590,3 +590,15 @@ textarea {
     transition: none;
   }
 }
+
+/* ---------- touch targets (a11y) ----------
+   Keep tappable controls at the 24px minimum on small screens. */
+@media (max-width: 640px) {
+  .link-arrow,
+  footer a,
+  footer button,
+  nav a,
+  .btn {
+    min-height: 24px;
+  }
+}

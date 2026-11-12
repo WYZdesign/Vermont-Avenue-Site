@@ -1,12 +1,22 @@
 import { NextResponse } from "next/server";
 import { createSession, hashPassword } from "@/lib/auth";
 import { isDbConfigured, query } from "@/lib/db";
+import { rateLimit, clientIp } from "@/lib/rate-limit";
 
 export async function POST(request: Request) {
   if (!isDbConfigured()) {
     return NextResponse.json(
       { ok: false, error: "Accounts are not configured yet." },
       { status: 503 }
+    );
+  }
+
+  const ip = clientIp(request);
+  const throttle = await rateLimit("signup:" + ip, 5, 600);
+  if (!throttle.allowed) {
+    return NextResponse.json(
+      { ok: false, error: "Too many signups from this device. Try again later." },
+      { status: 429 }
     );
   }
 

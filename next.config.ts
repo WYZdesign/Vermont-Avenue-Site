@@ -6,7 +6,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.instagram.com https://www.tiktok.com https://td.doubleclick.net",
+  "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.instagram.com https://www.tiktok.com https://td.doubleclick.net https://bandcamp.com https://w.soundcloud.com",
   "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://connect.facebook.net https://www.facebook.com",
   "media-src 'self' blob: https:",
   "object-src 'none'",
